@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% extends 'horas/dashboard_base.html' %}
+{% block content %}
+    <h1>Panel del Instructor</h1>
+    <h2>Horas Registradas</h2>
+    <ul>
+        {% for hora in horas %}
+            <li>{{ hora.actividad }} - {{ hora.aprendiz.username }} ({{ hora.horas_otorgadas }} horas)</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'agregar_horas' %}">Registrar Nueva Hora</a>
+{% endblock %}
+</body>
+</html>

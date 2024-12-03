@@ -22,5 +22,11 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('aprendiz/', views.vista_aprendiz, name='vista_aprendiz'),
     path('instructor/', views.vista_instructor, name='vista_instructor'),
+    path('horas/', views.listar_horas, name='listar_horas'),
+    path('horas/agregar/', views.agregar_horas, name='agregar_horas'),
+    path('dashboard/', views.dashboard, name='dashboard'),
+    path('dashboard/aprendiz/', views.dashboard_aprendiz, name='dashboard_aprendiz'),
+    path('dashboard/instructor/', views.dashboard_instructor, name='dashboard_instructor'),
+    path('dashboard/admin/', views.dashboard_admin, name='dashboard_admin'),
 
 ]

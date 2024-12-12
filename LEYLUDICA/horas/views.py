@@ -16,6 +16,9 @@ def vista_instructor(request):
 def vista_aprendiz(request):
     return render(request, 'horas/aprendiz.html')
 
+def es_admin(user):
+    return user.groups.filter(name='Admin').exists()
+
 def listar_horas(request):
     if request.user.groups.filter(name='Aprendiz').exists():
         horas = HorasLudicas.objects.filter(aprendiz=request.user)
@@ -66,4 +69,9 @@ def dashboard_instructor(request):
 def dashboard_admin(request):
     horas = HorasLudicas.objects.all()  
     usuarios = User.objects.all()  
+    return render(request, 'horas/dashboard_admin.html', {'horas': horas, 'usuarios': usuarios})
+
+def dashboard_admin(request):
+    horas = HorasLudicas.objects.all()
+    usuarios = User.objects.all()
     return render(request, 'horas/dashboard_admin.html', {'horas': horas, 'usuarios': usuarios})

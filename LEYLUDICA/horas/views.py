@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required, user_passes_test, permission_required
 from .models import HorasLudicas
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -47,18 +48,26 @@ def agregar_horas(request):
     return render(request, 'horas/agregar_horas.html')
 
 def dashboard(request):
-    if request.user.groups.filter(name='Aprendiz').exists():
+    user = request.user
+
+    if user.groups.filter(name='Aprendiz').exists():
         return redirect('dashboard_aprendiz')
-    elif request.user.groups.filter(name='Instructor').exists():
+    elif user.groups.filter(name='Instructor').exists():
         return redirect('dashboard_instructor')
-    elif request.user.groups.filter(name='Admin').exists():
+    elif user.groups.filter(name='Admin').exists():
         return redirect('dashboard_admin')
     else:
-        return render(request, '403.html')
+        rol = "No tienes un rol asignado"
+        context = {'rol': rol}
+        return render(request, 'horas/ dashboard.html', context)
     
 def dashboard_aprendiz(request):
-    horas = request.user.horas_aprendiz.all()  
-    return render(request, 'horas/dashboard_aprendiz.html', {'horas': horas})
+    # Suponiendo que tienes un modelo llamado HorasLudicas relacionado con el usuario
+    horas_ludicas = request.user.horasludicas_set.all()
+    context = {
+        'horas_ludicas': horas_ludicas,
+    }
+    return render(request, 'horas/dashboard_aprendiz.html', context)
 
 @login_required
 def dashboard_instructor(request):
@@ -67,11 +76,7 @@ def dashboard_instructor(request):
 
 @login_required
 def dashboard_admin(request):
-    horas = HorasLudicas.objects.all()  
-    usuarios = User.objects.all()  
-    return render(request, 'horas/dashboard_admin.html', {'horas': horas, 'usuarios': usuarios})
+    usuarios = User.objects.all()  # Lista de todos los usuarios
+    context = {'usuarios': usuarios}
+    return render(request, 'horas/dashboard_admin.html', context)
 
-def dashboard_admin(request):
-    horas = HorasLudicas.objects.all()
-    usuarios = User.objects.all()
-    return render(request, 'horas/dashboard_admin.html', {'horas': horas, 'usuarios': usuarios})

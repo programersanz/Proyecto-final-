@@ -31,4 +31,5 @@ urlpatterns = [
     path('dashboard/admin/', views.dashboard_admin, name='dashboard_admin'),
     path('login/', auth_views.LoginView.as_view(template_name='horas/login.html', redirect_authenticated_user= True), name='login'),
     path('logout/', auth_views.LogoutView.as_view(next_page='/'), name='logout'),
+    path('registrar_horas/', views.registrar_horas_ludicas, name='registrar_horas'),
 ]

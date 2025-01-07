@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required, user_passes_test, permission_required
 from .models import HorasLudicas
 from django.contrib.auth.models import User
+from .forms import HorasLudicasForm
 
 # Create your views here.
 
@@ -80,3 +81,15 @@ def dashboard_admin(request):
     context = {'usuarios': usuarios}
     return render(request, 'horas/dashboard_admin.html', context)
 
+@login_required
+def registrar_horas_ludicas(request):
+    if request.method == 'POST':
+        form = HorasLudicasForm(request.POST)
+        if form.is_valid():
+            horas_ludicas = form.save(commit=False)
+            horas_ludicas.usuario = request.user
+            horas_ludicas.save()
+            return redirect('dashboard_aprendiz')  # Cambia esto si tu URL tiene otro nombre
+    else:
+        form = HorasLudicasForm()
+    return render(request, 'horas/registrar_horas.html', {'form': form})

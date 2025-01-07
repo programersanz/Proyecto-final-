@@ -4,16 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <a href="{% url 'registrar_horas' %}">Registrar Horas Lúdicas</a>
 </head>
 <body>
     {% extends 'horas/dashboard_base.html' %}
-{% block content %}
-    <h1>Bienvenido, {{ user.username }}</h1>
-    <h2>Tus Horas Lúdicas</h2>
-    <ul>
-        {% for hora in horas %}
-            <li>{{ hora.actividad }} - {{ hora.horas_otorgadas }} horas</li>
-        {% endfor %}
+
+    {% block content %}
+    <h1>Dashboard Aprendiz</h1>
+    <p>Hola, {{ user.first_name }}. Aquí puedes ver tus horas lúdicas registradas:</p>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Descripción</th>
+                <th>Horas</th>
+                <th>Fecha</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for hora in horas_ludicas %}
+            <tr>
+                <td>{{ hora.descripcion }}</td>
+                <td>{{ hora.horas }}</td>
+                <td>{{ hora.fecha }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3">No tienes horas lúdicas registradas.</td>
+            </tr>
+            {% endfor %}
     </ul>
 {% endblock %}
 </body>

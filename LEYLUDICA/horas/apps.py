@@ -1,6 +1,4 @@
 from django.apps import AppConfig
-from django import forms
-from .models import HorasLudicas
 
 
 class HorasConfig(AppConfig):

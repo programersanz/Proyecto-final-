@@ -12,14 +12,6 @@ class HorasLudicas(models.Model):
     def __str__(self):
         return self.descripcion
 
-class HorasLudicas(models.Model):
-    descripcion = models.CharField(max_length=255)
-    horas = models.PositiveIntegerField()
-    fecha = models.DateField()
-    usuario = models.ForeignKey(User, on_delete=models.CASCADE, related_name="horas_ludicas")
-    
-    def __str__(self):
-        return self.descripcion
 
 # Nuevo modelo para almacenar datos adicionales del usuario
 class Profile(models.Model):

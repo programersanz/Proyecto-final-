@@ -1,0 +1,24 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>LEYLUDICA</title>
+  <!-- Aquí puedes incluir tus archivos CSS -->
+</head>
+<body>
+  <nav>
+    <a href="{% url 'home' %}">Inicio</a>
+    {% if user.is_authenticated %}
+      <a href="{% url 'logout' %}">Cerrar sesión</a>
+    {% else %}
+      <a href="{% url 'login' %}">Iniciar sesión</a>
+      <a href="{% url 'register' %}">Registrarse</a>
+    {% endif %}
+    <!-- Puedes agregar más enlaces según tus vistas -->
+  </nav>
+  
+  {% block content %}
+  {% endblock %}
+</body>
+</html>

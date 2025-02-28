@@ -18,9 +18,12 @@ from django.contrib import admin
 from django.urls import path
 from horas import views
 from django.contrib.auth import views as auth_views
+from horas.views import register
+from horas.views import home, register, activate
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', views.home, name='home'),
     path('aprendiz/', views.vista_aprendiz, name='vista_aprendiz'),
     path('instructor/', views.vista_instructor, name='vista_instructor'),
     path('horas/', views.listar_horas, name='listar_horas'),
@@ -29,7 +32,10 @@ urlpatterns = [
     path('dashboard/aprendiz/', views.dashboard_aprendiz, name='dashboard_aprendiz'),
     path('dashboard/instructor/', views.dashboard_instructor, name='dashboard_instructor'),
     path('dashboard/admin/', views.dashboard_admin, name='dashboard_admin'),
-    path('login/', auth_views.LoginView.as_view(template_name='horas/login.html', redirect_authenticated_user= True), name='login'),
-    path('logout/', auth_views.LogoutView.as_view(next_page='/'), name='logout'),
+    path('login/', auth_views.LoginView.as_view(template_name="registration/login.html"), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('registrar_horas/', views.registrar_horas_ludicas, name='registrar_horas'),
+    path('register/', register, name='register'),
+    path('activate/<uidb64>/<token>/', activate, name='activate'),
+
 ]

@@ -3,6 +3,16 @@ from django.contrib.auth.decorators import login_required, user_passes_test, per
 from .models import HorasLudicas
 from django.contrib.auth.models import User
 from .forms import HorasLudicasForm
+from django.contrib.auth import login
+from django.contrib.auth.forms import UserCreationForm
+from .forms import RegistroForm
+from django.contrib.auth.models import User
+from django.http import HttpResponse
+from django.contrib.sites.shortcuts import get_current_site
+from django.template.loader import render_to_string
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes, force_str
+from django.contrib.auth.tokens import default_token_generator
 
 # Create your views here.
 
@@ -93,3 +103,46 @@ def registrar_horas_ludicas(request):
     else:
         form = HorasLudicasForm()
     return render(request, 'horas/registrar_horas.html', {'form': form})
+
+from .forms import CustomUserCreationForm
+
+def register(request):
+    if request.method == "POST":
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            # Marcar el usuario como inactivo hasta confirmar el email
+            user.is_active = False
+            user.save()
+            # Los datos extras se guardan en el método save() del formulario
+            # Enviar email de activación
+            current_site = get_current_site(request)
+            subject = "Activa tu cuenta en LEYLUDICA"
+            message = render_to_string("registration/activation_email.html", {
+                "user": user,
+                "domain": current_site.domain,
+                "uid": urlsafe_base64_encode(force_bytes(user.pk)),
+                "token": default_token_generator.make_token(user),
+            })
+            user.email_user(subject, message)
+            return HttpResponse("Por favor, revisa tu correo electrónico para activar tu cuenta.")
+    else:
+        form = CustomUserCreationForm()
+    return render(request, "registration/register.html", {"form": form})
+
+def activate(request, uidb64, token):
+    try:
+        uid = force_str(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+    if user is not None and default_token_generator.check_token(user, token):
+        user.is_active = True
+        user.save()
+        login(request, user)
+        return redirect("home")
+    else:
+        return HttpResponse("El enlace de activación no es válido.")
+
+def home(request):
+    return render(request, "home.html")

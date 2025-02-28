@@ -137,4 +137,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.tudominio.com'  # Reemplázalo con tu proveedor SMTP
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'tuemail@ejemplo.com'
+EMAIL_HOST_PASSWORD = 'tupassword'
+EMAIL_USE_LOCALTIME = True
+DEFAULT_CHARSET = 'utf-8'
+
+
+ACCOUNT_EMAIL_VERIFICATION = "none"

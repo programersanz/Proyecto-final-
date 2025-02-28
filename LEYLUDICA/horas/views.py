@@ -112,7 +112,7 @@ def register(request):
         if form.is_valid():
             user = form.save(commit=False)
             # Marcar el usuario como inactivo hasta confirmar el email
-            user.is_active = False
+            user.is_active = True
             user.save()
             # Los datos extras se guardan en el método save() del formulario
             # Enviar email de activación

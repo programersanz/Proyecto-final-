@@ -13,6 +13,11 @@
 <!-- Barra de navegación -->
 <nav class="navbar">
     <div class="navbar-container">
+
+      <a href="{% url 'home' %}" class="logo-container">
+        <img src="{% static 'img/logo-sena.png' %}" alt="Logo SENA" class="logo-img">
+    </a>
+
         <a href="{% url 'home' %}" class="logo">Ley Lúdica</a>
         <ul class="nav-links">
             <li><a href="{% url 'home' %}">Inicio</a></li>

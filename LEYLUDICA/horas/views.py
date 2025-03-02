@@ -111,24 +111,20 @@ def register(request):
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
-            # Marcar el usuario como inactivo hasta confirmar el email
+            # Activamos la cuenta inmediatamente
             user.is_active = True
             user.save()
-            # Los datos extras se guardan en el método save() del formulario
-            # Enviar email de activación
-            current_site = get_current_site(request)
-            subject = "Activa tu cuenta en LEYLUDICA"
-            message = render_to_string("registration/activation_email.html", {
-                "user": user,
-                "domain": current_site.domain,
-                "uid": urlsafe_base64_encode(force_bytes(user.pk)),
-                "token": default_token_generator.make_token(user),
-            })
-            user.email_user(subject, message)
-            return HttpResponse("Por favor, revisa tu correo electrónico para activar tu cuenta.")
+            # Guardar datos extras en el perfil
+            user.profile.document_number = form.cleaned_data["document_number"]
+            user.profile.phone_number = form.cleaned_data["phone_number"]
+            user.profile.save()
+            
+            # Iniciar sesión y redirigir a home
+            return redirect("home")
     else:
         form = CustomUserCreationForm()
     return render(request, "registration/register.html", {"form": form})
+
 
 def activate(request, uidb64, token):
     try:

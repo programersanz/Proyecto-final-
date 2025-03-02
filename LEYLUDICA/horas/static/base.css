@@ -1,4 +1,7 @@
-/* Barra de navegación */
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
 .navbar {
     background-color: #007a33;
     padding: 15px 0;
@@ -47,15 +50,34 @@
     display: inline;
 }
 
+/* ===== Efecto de la línea animada en los enlaces ===== */
 .nav-links a {
+    position: relative;      /* Para poder posicionar el ::after */
     color: white;
     text-decoration: none;
     font-size: 18px;
-    transition: color 0.3s;
+    transition: color 0.3s;  /* Transición del color de texto */
+    padding: 5px 0;          /* Espacio para que la línea quede debajo */
+}
+
+.nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;                  /* Ajusta si quieres la línea más arriba/abajo */
+    width: 0;
+    height: 2px;
+    background-color: #f2f2f2;  /* Color de la línea */
+    transition: all 0.3s ease;  /* Velocidad de la animación */
 }
 
 .nav-links a:hover {
-    color: #f2f2f2;
+    color: #f2f2f2;  /* O el color que prefieras para el texto en hover */
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+    left: 0;
 }
 
 /* Botón de logout */
@@ -77,3 +99,35 @@
     margin-top: 20px;
     padding: 20px;
 }
+
+/* Contenedor global */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  /* Hero o tarjeta de bienvenida */
+  .welcome-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    padding: 40px;
+    text-align: center;
+  }
+  
+  /* Botones de acción */
+  .btn {
+    display: inline-block;
+    background-color: #007a33; /* o tu color de acento */
+    color: #fff;
+    padding: 12px 20px;
+    margin: 10px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background 0.3s ease;
+  }
+  .btn:hover {
+    background-color: #005f26; /* tono más oscuro al hacer hover */
+  }
+  

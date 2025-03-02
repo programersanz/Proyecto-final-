@@ -1,50 +1,91 @@
-
+/* ===== Fuente y cuerpo ===== */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #e8f5e9;
+    font-family: 'Poppins', sans-serif;  /* O la que prefieras */
+    background-color: #e8f5e9; /* O #f0f2f5 si quieres un gris claro */
     margin: 0;
     padding: 0;
 }
 
+/* ===== Contenedor para centrar el formulario y dar espacio ===== */
+.register-container {
+    max-width: 400px;   /* Ancho máximo en pantallas grandes */
+    width: 90%;         /* En pantallas pequeñas se ajusta al 90% */
+    margin: 80px auto;  /* Centrado horizontal y espacio superior */
+}
+
+/* ===== Encabezado ===== */
+.register-container h2 {
+    text-align: center;
+    color: #007a33;
+    margin-bottom: 20px;
+    font-size: 1.5rem;  /* Tamaño de fuente mayor para destacar */
+}
+
+/* ===== Formulario ===== */
 form {
-    width: 400px;
-    margin: 50px auto;
-    background-color: white;
+    background-color: #fff;
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-h2 {
-    text-align: center;
-    color: #007a33;
-    margin-bottom: 20px;
-}
-
+/* Ajuste para los <p> generados por form.as_p */
 form p {
-    font-size: 16px;
     margin-bottom: 15px;
+    color: #333;
 }
 
-input {
+/* Si quieres dar estilo a labels generados por Django:
+   (Django form.as_p genera <label> dentro del <p>) */
+form p label {
+    font-weight: 600;
+}
+
+/* ===== Inputs ===== */
+form input {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     margin-top: 5px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    font-size: 14px;
+    outline: none;
+    transition: border 0.3s ease;
 }
 
-button {
+form input:focus {
+    border: 1px solid #007a33; /* Resalta en verde al hacer focus */
+}
+
+/* ===== Botón ===== */
+form button {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     background-color: #007a33;
     color: white;
     border: none;
     border-radius: 5px;
-    font-size: 18px;
+    font-size: 16px;
     cursor: pointer;
+    margin-top: 20px;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
-button:hover {
+form button:hover {
     background-color: #005f27;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
 }
+
+/* ===== Ajustes responsive extra (opcional) ===== */
+@media (max-width: 480px) {
+    .register-container h2 {
+        font-size: 1.2rem;
+    }
+    form p {
+        font-size: 14px;
+    }
+    form input, form button {
+        font-size: 14px;
+    }
+}
+    

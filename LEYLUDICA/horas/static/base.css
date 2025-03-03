@@ -38,6 +38,7 @@ body {
 
 /* Lista de enlaces */
 .nav-links {
+    padding-right: 2%;
     list-style: none;
     display: flex;
     gap: 20px;
@@ -63,7 +64,7 @@ body {
     bottom: 0;
     width: 0;
     height: 2px;
-    background-color: #f2f2f2;
+    background-color: #0c08f7;
     transition: all 0.3s ease;
 }
 

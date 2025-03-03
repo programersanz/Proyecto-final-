@@ -1,11 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required, user_passes_test, permission_required
 from .models import HorasLudicas
-from django.contrib.auth.models import User
-from .forms import HorasLudicasForm
+from django.contrib.auth.models import User, Group
+from .forms import HorasLudicasForm, RegistroForm, CustomUserCreationForm
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
-from .forms import RegistroForm
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.contrib.sites.shortcuts import get_current_site
@@ -13,6 +12,10 @@ from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str
 from django.contrib.auth.tokens import default_token_generator
+from django.contrib.auth.models import Group
+from django.contrib import messages
+
+
 
 # Create your views here.
 
@@ -60,25 +63,27 @@ def agregar_horas(request):
 
 def dashboard(request):
     user = request.user
-
-    if user.groups.filter(name='Aprendiz').exists():
-        return redirect('dashboard_aprendiz')
-    elif user.groups.filter(name='Instructor').exists():
-        return redirect('dashboard_instructor')
-    elif user.groups.filter(name='Admin').exists():
-        return redirect('dashboard_admin')
+    if user.groups.filter(name="Aprendiz").exists():
+        return redirect("dashboard_aprendiz")
+    elif user.groups.filter(name="Bienestar").exists():
+        return redirect("dashboard_bienestar")
+    elif user.groups.filter(name="Administrativo").exists():
+        return redirect("dashboard_administrativo")
     else:
-        rol = "No tienes un rol asignado"
-        context = {'rol': rol}
-        return render(request, 'horas/ dashboard.html', context)
+        # Si no tiene ningún rol asignado, muestra un mensaje o redirige a home
+        return render(request, "horas/dashboard_default.html", {"mensaje": "No tienes un rol asignado."})
     
+@login_required
 def dashboard_aprendiz(request):
-    # Suponiendo que tienes un modelo llamado HorasLudicas relacionado con el usuario
-    horas_ludicas = request.user.horasludicas_set.all()
+    # Obtenemos las horas registradas por el aprendiz.
+    # Se asume que en tu modelo HorasLudicas usaste related_name="horas_ludicas" en el FK a User.
+    horas = request.user.horas_ludicas.all()
+    total_horas = sum(h.horas for h in horas)  # Asegúrate de que el campo se llame "horas"
     context = {
-        'horas_ludicas': horas_ludicas,
+        "horas": horas,
+        "total_horas": total_horas,
     }
-    return render(request, 'horas/dashboard_aprendiz.html', context)
+    return render(request, "horas/dashboard_aprendiz.html", context)
 
 @login_required
 def dashboard_instructor(request):
@@ -86,10 +91,12 @@ def dashboard_instructor(request):
     return render(request, 'horas/dashboard_instructor.html', {'horas': horas})
 
 @login_required
-def dashboard_admin(request):
-    usuarios = User.objects.all()  # Lista de todos los usuarios
-    context = {'usuarios': usuarios}
-    return render(request, 'horas/dashboard_admin.html', context)
+def dashboard_administrativo(request):
+    # Por ejemplo, mostrar la lista de todos los usuarios.
+    usuarios = User.objects.all()
+    context = {"usuarios": usuarios}
+    return render(request, "horas/dashboard_administrativo.html", context)
+
 
 @login_required
 def registrar_horas_ludicas(request):
@@ -104,26 +111,43 @@ def registrar_horas_ludicas(request):
         form = HorasLudicasForm()
     return render(request, 'horas/registrar_horas.html', {'form': form})
 
-from .forms import CustomUserCreationForm
+@login_required
+def dashboard_bienestar(request):
+    # Permitir búsqueda de aprendices por número de documento.
+    query = request.GET.get("q", "")
+    if query:
+        # Se asume que tienes un modelo Profile relacionado al User con el campo document_number.
+        aprendices = User.objects.filter(groups__name="Aprendiz", profile__document_number__icontains=query)
+    else:
+        aprendices = User.objects.filter(groups__name="Aprendiz")
+    context = {
+        "aprendices": aprendices,
+        "query": query,
+    }
+    return render(request, "horas/dashboard_bienestar.html", context)
 
 def register(request):
     if request.method == "POST":
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
-            # Activamos la cuenta inmediatamente
-            user.is_active = True
+            user.is_active = True  # Activamos la cuenta inmediatamente
             user.save()
-            # Guardar datos extras en el perfil
+            # Guardar datos extra en el perfil
             user.profile.document_number = form.cleaned_data["document_number"]
             user.profile.phone_number = form.cleaned_data["phone_number"]
             user.profile.save()
             
-            # Iniciar sesión y redirigir a home
+            # Asignar el grupo "Aprendiz"
+            grupo_aprendiz, created = Group.objects.get_or_create(name="Aprendiz")
+            user.groups.add(grupo_aprendiz)
+            
             return redirect("home")
     else:
         form = CustomUserCreationForm()
     return render(request, "registration/register.html", {"form": form})
+
+
 
 
 def activate(request, uidb64, token):

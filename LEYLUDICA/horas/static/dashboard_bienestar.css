@@ -1,0 +1,51 @@
+.dashboard-container {
+    max-width: 1000px;
+    margin: 60px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.dashboard-container h2 {
+    color: #007a33;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.search-bar {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.search-bar input[type="text"] {
+    width: 300px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.search-bar button {
+    padding: 10px 15px;
+    background-color: #007a33;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.aprendices-list table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.aprendices-list th, .aprendices-list td {
+    padding: 12px;
+    border: 1px solid #ccc;
+    text-align: left;
+}
+
+.aprendices-list th {
+    background-color: #007a33;
+    color: white;
+}

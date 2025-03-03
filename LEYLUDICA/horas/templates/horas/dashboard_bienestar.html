@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'horas/dashboard_bienestar.css' %}">
+
+{% block content %}
+<div class="dashboard-container">
+    <h2>Dashboard Bienestar</h2>
+    <div class="search-bar">
+       <form method="get">
+           <input type="text" name="q" placeholder="Buscar por número de documento" value="{{ query }}">
+           <button type="submit">Buscar</button>
+       </form>
+    </div>
+    <div class="aprendices-list">
+      {% if aprendices %}
+         <table>
+           <thead>
+             <tr>
+               <th>Usuario</th>
+               <th>Número de documento</th>
+               <th>Número de teléfono</th>
+             </tr>
+           </thead>
+           <tbody>
+             {% for a in aprendices %}
+             <tr>
+               <td>{{ a.username }}</td>
+               <td>{{ a.profile.document_number }}</td>
+               <td>{{ a.profile.phone_number }}</td>
+             </tr>
+             {% endfor %}
+           </tbody>
+         </table>
+      {% else %}
+         <p>No se encontraron aprendices.</p>
+      {% endif %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'horas/dashboard_administrativo.css' %}">
+
+{% block content %}
+<div class="dashboard-container">
+    <h2>Dashboard Administrativo</h2>
+    <div class="usuarios-list">
+      {% if usuarios %}
+         <table>
+           <thead>
+             <tr>
+               <th>Usuario</th>
+               <th>Correo</th>
+               <th>Nombre completo</th>
+             </tr>
+           </thead>
+           <tbody>
+             {% for u in usuarios %}
+             <tr>
+               <td>{{ u.username }}</td>
+               <td>{{ u.email }}</td>
+               <td>{{ u.first_name }} {{ u.last_name }}</td>
+             </tr>
+             {% endfor %}
+           </tbody>
+         </table>
+      {% else %}
+         <p>No hay usuarios registrados.</p>
+      {% endif %}
+    </div>
+</div>
+{% endblock %}

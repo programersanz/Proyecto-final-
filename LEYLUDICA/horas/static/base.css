@@ -8,12 +8,11 @@ body {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Contenedor principal de la barra (ocupa 100% de ancho) */
 .navbar-container {
     display: flex;
     align-items: center;
-    justify-content: flex-start; /* Alinea elementos al lado izquierdo */
-    width: 100%;                /* Ocupa todo el ancho */
+    justify-content: flex-start;
+    width: 100%;
     padding: 0 20px;
 }
 
@@ -21,16 +20,14 @@ body {
 .left-section {
     display: flex;
     align-items: center;
-    margin-right: auto; /* Empuja el ul.nav-links a la derecha */
+    margin-right: auto;
 }
 
-/* Imagen del logo */
 .logo-img {
-    height: 40px; /* Ajusta el tamaño del logo */
+    height: 40px;
     margin-right: 10px;
 }
 
-/* Texto "Ley Lúdica" */
 .logo-text {
     font-size: 24px;
     font-weight: bold;
@@ -50,29 +47,28 @@ body {
     display: inline;
 }
 
-/* ===== Efecto de la línea animada en los enlaces ===== */
 .nav-links a {
-    position: relative;      /* Para poder posicionar el ::after */
+    position: relative;
     color: white;
     text-decoration: none;
     font-size: 18px;
-    transition: color 0.3s;  /* Transición del color de texto */
-    padding: 5px 0;          /* Espacio para que la línea quede debajo */
+    transition: color 0.3s;
+    padding: 5px 0;
 }
 
 .nav-links a::after {
     content: "";
     position: absolute;
     left: 50%;
-    bottom: 0;                  /* Ajusta si quieres la línea más arriba/abajo */
+    bottom: 0;
     width: 0;
     height: 2px;
-    background-color: #f2f2f2;  /* Color de la línea */
-    transition: all 0.3s ease;  /* Velocidad de la animación */
+    background-color: #f2f2f2;
+    transition: all 0.3s ease;
 }
 
 .nav-links a:hover {
-    color: #f2f2f2;  /* O el color que prefieras para el texto en hover */
+    color: #f2f2f2;
 }
 
 .nav-links a:hover::after {
@@ -80,7 +76,6 @@ body {
     left: 0;
 }
 
-/* Botón de logout */
 .logout-btn {
     background: none;
     border: none;
@@ -94,40 +89,36 @@ body {
     color: #f2f2f2;
 }
 
-/* Contenido debajo de la barra */
 .content {
     margin-top: 20px;
     padding: 20px;
 }
 
-/* Contenedor global */
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
-  }
-  
-  /* Hero o tarjeta de bienvenida */
-  .welcome-card {
+}
+
+.welcome-card {
     background-color: #fff;
     border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     padding: 40px;
     text-align: center;
-  }
-  
-  /* Botones de acción */
-  .btn {
+}
+
+.btn {
     display: inline-block;
-    background-color: #007a33; /* o tu color de acento */
+    background-color: #007a33;
     color: #fff;
     padding: 12px 20px;
     margin: 10px;
     border-radius: 4px;
     text-decoration: none;
     transition: background 0.3s ease;
-  }
-  .btn:hover {
-    background-color: #005f26; /* tono más oscuro al hacer hover */
-  }
-  
+}
+
+.btn:hover {
+    background-color: #005f26;
+}

@@ -17,10 +17,9 @@
 <body>
 
 <!-- Barra de navegación -->
-<!-- Barra de navegación -->
 <nav class="navbar">
     <div class="navbar-container">
-      <!-- Sección izquierda: Logo SENA + Texto "Ley Lúdica" -->
+      <!-- Logo Sena y Texto "Ley Lúdica" -->
       <div class="left-section">
         <a href="{% url 'home' %}">
           <img src="{% static 'img/logo_sena.png' %}" alt="Logo SENA" class="logo-img">
@@ -40,7 +39,7 @@
           </li>
         {% else %}
           <li><a href="{% url 'login' %}">Iniciar sesión</a></li>
-          <li><a href="{% url 'register' %}">Registrarse</a></li>
+          <li><a href="{% url 'register' %}">Registro</a></li>
         {% endif %}
       </ul>
     </div>

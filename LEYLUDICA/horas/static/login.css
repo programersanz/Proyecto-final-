@@ -1,34 +1,27 @@
-/* Fuente base y reset de márgenes/paddings */
 body {
-    font-family: 'Poppins', sans-serif; /* Fuente importada de Google Fonts */
+    font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f0f2f5; /* Fondo gris claro para resaltar el contenedor blanco */
+    background-color: #f0f2f5;
 }
 
-/* Ajuste de la navbar (si es fija), deja suficiente espacio arriba para que no tape el contenido */
-
-
-/* Contenedor principal para el login */
 .login-container {
-    max-width: 400px;      /* Ancho máximo en pantallas grandes */
-    width: 90%;            /* Se ajusta al 90% en pantallas pequeñas */
-    margin: 100px auto;    /* Centrado + espacio top para no quedar debajo de la navbar */
+    max-width: 400px;
+    width: 90%;
+    margin: 100px auto;
     background: #fff;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
     text-align: center;
-    padding: 30px;         /* Espacio interno */
+    padding: 30px;
 }
 
-/* Título de la sección */
 .login-container h2 {
     color: #006400;
-    font-size: 1.5rem; /* Ajusta el tamaño de fuente */
+    font-size: 1.5rem;
     margin-bottom: 20px;
 }
 
-/* Formulario en columna */
 form {
     display: flex;
     flex-direction: column;
@@ -36,16 +29,14 @@ form {
     margin: 0 auto;
 }
 
-/* Ajuste de márgenes entre campos (Django genera <p> con as_p) */
 form p {
     margin-bottom: 15px;
-    text-align: left;  /* Opcional: Alinea las etiquetas a la izquierda */
+    text-align: left;
     color: #333;
 }
 
-/* Inputs de texto y password */
-input[type="text"], 
-input[type="password"], 
+input[type="text"],
+input[type="password"],
 input[type="email"] {
     width: 100%;
     padding: 12px;
@@ -59,11 +50,10 @@ input[type="email"] {
 input[type="text"]:focus,
 input[type="password"]:focus,
 input[type="email"]:focus {
-    border: 1px solid #006400; /* Resalta el borde al hacer focus */
-    outline: none;             /* Elimina el outline por defecto */
+    border: 1px solid #006400;
+    outline: none;
 }
 
-/* Botón de "Entrar" */
 .login-btn {
     background-color: #006400;
     color: #fff;
@@ -72,24 +62,25 @@ input[type="email"]:focus {
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
-    margin-top: 10px;        /* Separación del último input */
+    margin-top: 10px;
     transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
 .login-btn:hover {
-    background-color: #004d00; /* Verde más oscuro en hover */
-    box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+    background-color: #004d00;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
 }
 
-/* Ajustes responsive adicionales (opcional) */
 @media (max-width: 480px) {
     .login-container {
-        margin-top: 120px; /* Asegura que el formulario no quede oculto bajo la navbar en pantallas muy pequeñas */
+        margin-top: 120px;
         padding: 20px;
     }
+
     .login-container h2 {
         font-size: 1.2rem;
     }
+
     form p {
         font-size: 14px;
     }

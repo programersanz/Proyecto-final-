@@ -1,27 +1,23 @@
-/* ===== Fuente y cuerpo ===== */
 body {
-    font-family: 'Poppins', sans-serif;  /* O la que prefieras */
-    background-color: #e8f5e9; /* O #f0f2f5 si quieres un gris claro */
+    font-family: 'Poppins', sans-serif;
+    background-color: #e8f5e9;
     margin: 0;
     padding: 0;
 }
 
-/* ===== Contenedor para centrar el formulario y dar espacio ===== */
 .register-container {
-    max-width: 400px;   /* Ancho máximo en pantallas grandes */
-    width: 90%;         /* En pantallas pequeñas se ajusta al 90% */
-    margin: 80px auto;  /* Centrado horizontal y espacio superior */
+    max-width: 400px;
+    width: 90%;
+    margin: 80px auto;
 }
 
-/* ===== Encabezado ===== */
 .register-container h2 {
     text-align: center;
     color: #007a33;
     margin-bottom: 20px;
-    font-size: 1.5rem;  /* Tamaño de fuente mayor para destacar */
+    font-size: 1.5rem;
 }
 
-/* ===== Formulario ===== */
 form {
     background-color: #fff;
     padding: 30px;
@@ -29,19 +25,15 @@ form {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Ajuste para los <p> generados por form.as_p */
 form p {
     margin-bottom: 15px;
     color: #333;
 }
 
-/* Si quieres dar estilo a labels generados por Django:
-   (Django form.as_p genera <label> dentro del <p>) */
 form p label {
     font-weight: 600;
 }
 
-/* ===== Inputs ===== */
 form input {
     width: 100%;
     padding: 12px;
@@ -54,10 +46,9 @@ form input {
 }
 
 form input:focus {
-    border: 1px solid #007a33; /* Resalta en verde al hacer focus */
+    border: 1px solid #007a33;
 }
 
-/* ===== Botón ===== */
 form button {
     width: 100%;
     padding: 12px;
@@ -76,16 +67,17 @@ form button:hover {
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
 }
 
-/* ===== Ajustes responsive extra (opcional) ===== */
 @media (max-width: 480px) {
     .register-container h2 {
         font-size: 1.2rem;
     }
+
     form p {
         font-size: 14px;
     }
-    form input, form button {
+
+    form input,
+    form button {
         font-size: 14px;
     }
 }
-    

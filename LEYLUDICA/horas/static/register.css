@@ -6,9 +6,11 @@ body {
 }
 
 .register-container {
+    align-items: center;
     max-width: 400px;
     width: 90%;
     margin: 80px auto;
+    padding: auto;
 }
 
 .register-container h2 {

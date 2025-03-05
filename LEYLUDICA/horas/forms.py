@@ -1,5 +1,5 @@
 from django import forms
-from .models import HorasLudicas
+from .models import HorasLudicas, Profile
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User, Group 
 
@@ -50,3 +50,13 @@ class HorasLudicasBienestarForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         # Filtra el queryset para mostrar sólo usuarios que pertenecen al grupo "Aprendiz"
         self.fields['usuario'].queryset = User.objects.filter(groups__name="Aprendiz")
+
+class EditUserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'email']
+
+class EditProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['document_number', 'phone_number']

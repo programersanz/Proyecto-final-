@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required, user_passes_test, permission_required
 from .models import HorasLudicas
 from django.contrib.auth.models import User, Group
-from .forms import HorasLudicasForm, RegistroForm, CustomUserCreationForm, HorasLudicasBienestarForm
+from .forms import HorasLudicasForm, RegistroForm, CustomUserCreationForm, HorasLudicasBienestarForm, EditUserForm, EditProfileForm
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
@@ -166,3 +166,25 @@ def activate(request, uidb64, token):
 
 def home(request):
     return render(request, "home.html")
+
+@login_required
+def editar_perfil(request):
+    user = request.user
+    # Inicializar los formularios con la instancia actual
+    if request.method == "POST":
+        user_form = EditUserForm(request.POST, instance=user)
+        profile_form = EditProfileForm(request.POST, instance=user.profile)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            messages.success(request, "Perfil actualizado exitosamente.")
+            return redirect("home")
+    else:
+        user_form = EditUserForm(instance=user)
+        profile_form = EditProfileForm(instance=user.profile)
+        
+    context = {
+        "user_form": user_form,
+        "profile_form": profile_form,
+    }
+    return render(request, "horas/editar_perfil.html", context)

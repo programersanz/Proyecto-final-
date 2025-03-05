@@ -19,6 +19,7 @@ from django.urls import path
 from horas import views
 from django.contrib.auth import views as auth_views
 from horas.views import home, register, activate, agregar_horas_bienestar
+from horas.views import editar_perfil
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
@@ -36,5 +37,6 @@ urlpatterns = [
     path('registrar_horas/', views.registrar_horas_ludicas, name='registrar_horas'),
     path('register/', register, name='register'),
     path('activate/<uidb64>/<token>/', activate, name='activate'),
+    path('editar_perfil/', editar_perfil, name='editar_perfil'),
 
 ]

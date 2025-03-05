@@ -1,0 +1,46 @@
+.perfil-container {
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.perfil-container h2 {
+    text-align: center;
+    color: #007a33;
+    margin-bottom: 20px;
+}
+
+form fieldset {
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+form legend {
+    font-weight: bold;
+    color: #007a33;
+}
+
+form p {
+    margin-bottom: 10px;
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #007a33;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #005f27;
+}

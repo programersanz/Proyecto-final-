@@ -1,4 +1,5 @@
-{% extends "base.html" %} {% load static %}
+{% extends "base.html" %}
+{% load static %}
 <link rel="stylesheet" href="{% static 'dashboard_aprendiz.css' %}" />
 
 {% block content %}
@@ -11,17 +12,17 @@
     <table>
       <thead>
         <tr>
-          <th>Actividad</th>
+          <th>Descripción</th>
           <th>Fecha</th>
-          <th>Horas otorgadas</th>
+          <th>Horas</th>
         </tr>
       </thead>
       <tbody>
         {% for h in horas_ludicas %}
         <tr>
-          <td>{{ h.actividad }}</td>
+          <td>{{ h.descripcion }}</td>
           <td>{{ h.fecha }}</td>
-          <td>{{ h.horas_otorgadas }}</td>
+          <td>{{ h.horas }}</td>
         </tr>
         {% endfor %}
       </tbody>

@@ -13,6 +13,7 @@ class HorasLudicas(models.Model):
         return self.descripcion
 
 
+
 # Nuevo modelo para almacenar datos adicionales del usuario
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)

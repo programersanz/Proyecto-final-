@@ -76,15 +76,14 @@ def dashboard(request):
     
 @login_required
 def dashboard_aprendiz(request):
-    # Obtenemos las horas registradas por el aprendiz.
-    # Se asume que en tu modelo HorasLudicas usaste related_name="horas_ludicas" en el FK a User.
     horas = request.user.horas_ludicas.all()
-    total_horas = sum(h.horas for h in horas)  # Asegúrate de que el campo se llame "horas"
+    total_horas = sum(h.horas for h in horas)
     context = {
-        "horas": horas,
+        "horas_ludicas": horas,
         "total_horas": total_horas,
     }
     return render(request, "horas/dashboard_aprendiz.html", context)
+
 
 @login_required
 def dashboard_instructor(request):

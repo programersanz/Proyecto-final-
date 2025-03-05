@@ -18,20 +18,18 @@ from django.contrib import admin
 from django.urls import path
 from horas import views
 from django.contrib.auth import views as auth_views
-from horas.views import register
-from horas.views import home, register, activate
-
+from horas.views import home, register, activate, agregar_horas_bienestar
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
     path('aprendiz/', views.vista_aprendiz, name='vista_aprendiz'),
     path('instructor/', views.vista_instructor, name='vista_instructor'),
     path('horas/', views.listar_horas, name='listar_horas'),
-    path('horas/agregar/', views.agregar_horas, name='agregar_horas'),
     path('dashboard/', views.dashboard, name='dashboard'),
     path('dashboard/aprendiz/', views.dashboard_aprendiz, name='dashboard_aprendiz'),
     path('dashboard/instructor/', views.dashboard_instructor, name='dashboard_instructor'),
     path('dashboard/administrativo/', views.dashboard_administrativo, name='dashboard_admin'),
+    path('dashboard/bienestar/agregar_horas/', agregar_horas_bienestar, name='agregar_horas_bienestar'),
     path('dashboard/bienestar/', views.dashboard_bienestar, name='dashboard_bienestar'),
     path('login/', auth_views.LoginView.as_view(template_name="registration/login.html"), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),

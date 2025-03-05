@@ -1,7 +1,7 @@
 from django import forms
 from .models import HorasLudicas
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User 
+from django.contrib.auth.models import User, Group 
 
 class HorasLudicasForm(forms.ModelForm):
     class Meta:
@@ -40,3 +40,13 @@ class CustomUserCreationForm(UserCreationForm):
             user.profile.phone_number = self.cleaned_data["phone_number"]
             user.profile.save()
         return user
+
+class HorasLudicasBienestarForm(forms.ModelForm):
+    class Meta:
+        model = HorasLudicas
+        fields = ['descripcion', 'horas', 'fecha', 'usuario']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Filtra el queryset para mostrar sólo usuarios que pertenecen al grupo "Aprendiz"
+        self.fields['usuario'].queryset = User.objects.filter(groups__name="Aprendiz")

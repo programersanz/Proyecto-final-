@@ -2,11 +2,11 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required, user_passes_test, permission_required
 from .models import HorasLudicas
 from django.contrib.auth.models import User, Group
-from .forms import HorasLudicasForm, RegistroForm, CustomUserCreationForm
+from .forms import HorasLudicasForm, RegistroForm, CustomUserCreationForm, HorasLudicasBienestarForm
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.http import HttpResponse
+from django.http import HttpResponseForbidden, HttpResponse
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -46,20 +46,21 @@ def listar_horas(request):
 
     return render(request, 'horas/listar_horas.html', {'horas': horas})
 
-def agregar_horas(request):
+@login_required
+def agregar_horas_bienestar(request):
+    # Verificar si el usuario está en el grupo "Bienestar"
+    if not request.user.groups.filter(name="Bienestar").exists():
+        return HttpResponseForbidden("No tienes permiso para acceder a esta vista.")
+
     if request.method == 'POST':
-        actividad = request.POST.get('actividad')
-        fecha = request.POST.get('fecha')   
-        horas_otorgadas = request.POST.get('horas_otorgadas')
-        HorasLudicas.objects.create(
-            aprendiz=request.user,
-            actividad=actividad,
-            fecha=fecha,
-            horas_otorgadas=horas_otorgadas,
-            registrado_por=request.user
-        )
-        return redirect('listar_horas')
-    return render(request, 'horas/agregar_horas.html')
+        form = HorasLudicasBienestarForm(request.POST)
+        if form.is_valid():
+            form.save()  # Guarda la nueva instancia de HorasLudicas
+            return redirect('dashboard_bienestar')  # Redirige al dashboard de Bienestar
+    else:
+        form = HorasLudicasBienestarForm()
+
+    return render(request, 'horas/agregar_horas_bienestar.html', {'form': form})
 
 def dashboard(request):
     user = request.user

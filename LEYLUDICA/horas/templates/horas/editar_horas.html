@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'horas/editar_horas.css' %}">
+
+{% block content %}
+<div class="form-container">
+  <h2>Editar Registro de Horas</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn-save">Guardar Cambios</button>
+  </form>
+</div>
+{% endblock %}

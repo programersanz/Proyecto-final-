@@ -60,3 +60,4 @@ class EditProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['document_number', 'phone_number']
+

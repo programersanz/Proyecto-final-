@@ -14,7 +14,9 @@ from django.utils.encoding import force_bytes, force_str
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.auth.models import Group
 from django.contrib import messages
-
+from django.urls import reverse_lazy
+from django.views.generic import UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 # Create your views here.
@@ -188,3 +190,30 @@ def editar_perfil(request):
         "profile_form": profile_form,
     }
     return render(request, "horas/editar_perfil.html", context)
+
+class EditarHoraView(LoginRequiredMixin, UpdateView):
+    model = HorasLudicas
+    form_class = HorasLudicasForm
+    template_name = "horas/editar_horas.html"
+    success_url = reverse_lazy("dashboard_aprendiz")
+    
+    def get_queryset(self):
+        qs = super().get_queryset()
+        user = self.request.user
+        # Si el usuario está en el grupo "Bienestar", puede editar cualquier registro
+        if user.groups.filter(name="Bienestar").exists():
+            return qs
+        # De lo contrario, el usuario solo puede editar sus propios registros
+        return qs.filter(usuario=user)
+
+class EliminarHoraView(LoginRequiredMixin, DeleteView):
+    model = HorasLudicas
+    template_name = "horas/eliminar_horas.html"
+    success_url = reverse_lazy("dashboard_aprendiz")
+    
+    def get_queryset(self):
+        qs = super().get_queryset()
+        user = self.request.user
+        if user.groups.filter(name="Bienestar").exists():
+            return qs
+        return qs.filter(usuario=user)

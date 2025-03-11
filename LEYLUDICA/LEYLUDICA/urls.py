@@ -18,8 +18,8 @@ from django.contrib import admin
 from django.urls import path
 from horas import views
 from django.contrib.auth import views as auth_views
-from horas.views import home, register, activate, agregar_horas_bienestar
-from horas.views import editar_perfil
+from horas.views import home, register, activate, agregar_horas_bienestar, editar_perfil, dashboard_aprendiz, dashboard_bienestar, dashboard_administrativo, agregar_horas_bienestar, EditarHoraView, EliminarHoraView
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
@@ -38,5 +38,7 @@ urlpatterns = [
     path('register/', register, name='register'),
     path('activate/<uidb64>/<token>/', activate, name='activate'),
     path('editar_perfil/', editar_perfil, name='editar_perfil'),
+    path('horas/editar/<int:pk>/', EditarHoraView.as_view(), name='editar_horas'),
+    path('horas/eliminar/<int:pk>/', EliminarHoraView.as_view(), name='eliminar_horas'),
 
 ]

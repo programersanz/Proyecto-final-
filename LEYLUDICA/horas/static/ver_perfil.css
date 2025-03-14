@@ -1,0 +1,23 @@
+.perfil-detalle {
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.perfil-detalle h2 {
+    text-align: center;
+    color: #007a33;
+    margin-bottom: 20px;
+}
+
+.perfil-detalle p {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.perfil-detalle strong {
+    color: #007a33;
+}

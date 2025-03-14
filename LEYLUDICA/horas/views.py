@@ -24,12 +24,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 def es_aprendiz(user):
     return user.groups.filter(name='Aprendiz').exists()
 
-def es_instructor(user):
-    return user.groups.filter(name='Instructor').exists()
-
-def vista_instructor(request):
-    return render(request, 'horas/instructor.html')
-
 def vista_aprendiz(request):
     return render(request, 'horas/aprendiz.html')
 
@@ -88,11 +82,6 @@ def dashboard_aprendiz(request):
 
 
 @login_required
-def dashboard_instructor(request):
-    horas = HorasLudicas.objects.all()  
-    return render(request, 'horas/dashboard_instructor.html', {'horas': horas})
-
-@login_required
 def dashboard_administrativo(request):
     # Por ejemplo, mostrar la lista de todos los usuarios.
     usuarios = User.objects.all()
@@ -119,9 +108,9 @@ def dashboard_bienestar(request):
     query = request.GET.get("q", "")
     if query:
         # Se asume que tienes un modelo Profile relacionado al User con el campo document_number.
-        aprendices = User.objects.filter(groups__name="Aprendiz", profile__document_number__icontains=query)
+        aprendices = User.objects.filter(groups__name__iexact="Aprendiz", profile__document_number__icontains=query).distinct()
     else:
-        aprendices = User.objects.filter(groups__name="Aprendiz")
+        aprendices = User.objects.filter(groups__name__iexact="Aprendiz").distinct()
     context = {
         "aprendices": aprendices,
         "query": query,
@@ -217,3 +206,8 @@ class EliminarHoraView(LoginRequiredMixin, DeleteView):
         if user.groups.filter(name="Bienestar").exists():
             return qs
         return qs.filter(usuario=user)
+    
+@login_required
+def ver_perfil(request):
+    # Se asume que el usuario tiene un Profile creado mediante la señal.
+    return render(request, "horas/ver_perfil.html", {"user": request.user})

@@ -49,7 +49,7 @@ class HorasLudicasBienestarForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         # Filtra el queryset para mostrar sólo usuarios que pertenecen al grupo "Aprendiz"
-        self.fields['usuario'].queryset = User.objects.filter(groups__name="Aprendiz")
+        self.fields['usuario'].queryset = User.objects.filter(groups__name__iexact="Aprendiz").distinct()
 
 class EditUserForm(forms.ModelForm):
     class Meta:

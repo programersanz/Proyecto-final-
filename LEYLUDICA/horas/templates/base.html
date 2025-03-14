@@ -2,56 +2,59 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <link rel="preconnect" href="https://fonts.gstatic.com" />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
-    rel="stylesheet"
-  />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ley Lúdica</title>
-    {% load static %}
-    
-    <link rel="stylesheet" href="{% static '/base.css' %}">
+    <link rel="stylesheet" href="{% static 'base.css' %}">
 </head>
 <body>
-
-<!-- Barra de navegación -->
 <nav class="navbar">
-    <div class="navbar-container">
-      <!-- Logo Sena y Texto "Ley Lúdica" -->
-      <div class="left-section">
-        <a href="{% url 'home' %}">
+  <div class="navbar-container">
+    <div class="left-section">
+      <a href="{% url 'home' %}" class="logo-container">
           <img src="{% static 'img/logo_sena.png' %}" alt="Logo SENA" class="logo-img">
-        </a>
-        <a href="{% url 'home' %}" class="logo-text">Ley Lúdica</a>
-      </div>
+      </a>
+      <a href="{% url 'home' %}" class="logo-text">Ley Lúdica</a>
+    </div>
+    <ul class="nav-links">
+      <li><a href="{% url 'home' %}">Inicio</a></li>
       
-      <!-- Sección derecha: Menú de navegación -->
-      <ul class="nav-links">
-        <li><a href="{% url 'home' %}">Inicio</a></li>
-        {% if user.is_authenticated %}
-          <li>
-            <form action="{% url 'logout' %}" method="post" style="display:inline;">
+      {% if user.is_authenticated %}
+        <!-- Enlace al Dashboard -->
+        <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+        
+        {% if is_aprendiz %}
+          <li><a href="{% url 'ver_perfil' %}">Mi Perfil</a></li>
+        {% endif %}
+        
+        {% if is_bienestar %}
+          <li><a href="{% url 'ver_perfil' %}">Mi Perfil</a></li>
+          <li><a href="{% url 'agregar_horas_bienestar' %}">Agregar Horas</a></li>
+        {% endif %}
+        
+        {% if is_administrativo %}
+          <li><a href="{% url 'dashboard_administrativo' %}">Administrativo</a></li>
+        {% endif %}
+        
+        <li><a href="{% url 'editar_perfil' %}">Editar Perfil</a></li>
+        
+        <li>
+          <form action="{% url 'logout' %}" method="post" style="display:inline;">
               {% csrf_token %}
               <button type="submit" class="logout-btn">Cerrar sesión</button>
-            </form>
-          </li>
-        {% else %}
-          <li><a href="{% url 'login' %}">Iniciar sesión</a></li>
-          <li><a href="{% url 'register' %}">Registro</a></li>
-        {% endif %}
-      </ul>
-    </div>
-  </nav>
-  
+          </form>
+        </li>
+      {% else %}
+        <li><a href="{% url 'login' %}">Iniciar sesión</a></li>
+        <li><a href="{% url 'register' %}">Registrarse</a></li>
+      {% endif %}
+    </ul>
+  </div>
+</nav>
 
-
-<!-- Contenido dinámico -->
 <div class="content">
     {% block content %}
     {% endblock %}
 </div>
-
 </body>
 </html>

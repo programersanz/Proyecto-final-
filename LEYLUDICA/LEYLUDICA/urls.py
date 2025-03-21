@@ -39,5 +39,9 @@ urlpatterns = [
     path('registrar_horas/', views.registrar_horas_ludicas, name='registrar_horas'),
     path('horas/editar/<int:pk>/', EditarHoraView.as_view(), name='editar_horas'),
     path('horas/eliminar/<int:pk>/', EliminarHoraView.as_view(), name='eliminar_horas'),
+    path('dashboard/bienestar/detalle_aprendiz/<int:user_id>/', views.detalle_aprendiz, name='detalle_aprendiz'),
+    path('horas/eliminar_parcial/<int:pk>/', views.eliminar_horas_parcial, name='eliminar_horas_parcial'),
+
+
 
 ]

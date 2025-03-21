@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'horas/eliminar_horas_parcial.css' %}">
+
+{% block content %}
+<div class="confirm-container">
+  <h2>Eliminar Horas</h2>
+  <p>Registro: <strong>{{ registro.descripcion }}</strong></p>
+  <p>Horas actuales: <strong>{{ registro.horas }}</strong></p>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn-delete">Eliminar</button>
+    <a href="{% url 'detalle_aprendiz' registro.usuario.id %}" class="btn-cancel">Cancelar</a>
+  </form>
+</div>
+{% endblock %}

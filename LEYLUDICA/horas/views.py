@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required, user_passes_test, permission_required
 from .models import HorasLudicas
 from django.contrib.auth.models import User, Group
-from .forms import HorasLudicasForm, RegistroForm, CustomUserCreationForm, HorasLudicasBienestarForm, EditUserForm, EditProfileForm
+from .forms import HorasLudicasForm, RegistroForm, CustomUserCreationForm, HorasLudicasBienestarForm, EditUserForm, EditProfileForm, EliminarHorasForm
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
@@ -211,3 +211,57 @@ class EliminarHoraView(LoginRequiredMixin, DeleteView):
 def ver_perfil(request):
     # Se asume que el usuario tiene un Profile creado mediante la señal.
     return render(request, "horas/ver_perfil.html", {"user": request.user})
+
+@login_required
+def detalle_aprendiz(request, user_id):
+    # Solo el rol "Bienestar" puede ver detalles de aprendices
+    if not request.user.groups.filter(name="Bienestar").exists():
+        return HttpResponseForbidden("No tienes permiso para acceder a esta vista.")
+    
+    try:
+        aprendiz = User.objects.get(id=user_id, groups__name__iexact="Aprendiz")
+    except User.DoesNotExist:
+        return HttpResponse("Aprendiz no encontrado", status=404)
+    
+    # Se asume que en el modelo HorasLudicas usaste related_name="horas_ludicas" en el FK a User
+    horas = aprendiz.horas_ludicas.all()
+    total_horas = sum(h.horas for h in horas)
+    
+    context = {
+        "aprendiz": aprendiz,
+        "horas": horas,
+        "total_horas": total_horas,
+    }
+    return render(request, "horas/detalle_aprendiz.html", context)
+
+@login_required
+def eliminar_horas_parcial(request, pk):
+    # Solo los usuarios con rol "Bienestar" pueden eliminar horas.
+    if not request.user.groups.filter(name="Bienestar").exists():
+        return HttpResponseForbidden("No tienes permiso para eliminar horas.")
+
+    try:
+        registro = HorasLudicas.objects.get(pk=pk)
+    except HorasLudicas.DoesNotExist:
+        return HttpResponse("Registro no encontrado.", status=404)
+    
+    if request.method == "POST":
+        form = EliminarHorasForm(request.POST)
+        if form.is_valid():
+            horas_a_eliminar = form.cleaned_data["horas_a_eliminar"]
+            # Si se quiere eliminar igual o más horas de las registradas, elimina el registro
+            if horas_a_eliminar >= registro.horas:
+                registro.delete()
+            else:
+                registro.horas -= horas_a_eliminar
+                registro.save()
+            # Redirige al detalle del aprendiz, usando el id del usuario asociado al registro
+            return redirect("detalle_aprendiz", user_id=registro.usuario.id)
+    else:
+        form = EliminarHorasForm()
+    
+    context = {
+        "registro": registro,
+        "form": form,
+    }
+    return render(request, "horas/eliminar_horas_parcial.html", context)

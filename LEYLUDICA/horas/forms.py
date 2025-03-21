@@ -61,3 +61,7 @@ class EditProfileForm(forms.ModelForm):
         model = Profile
         fields = ['document_number', 'phone_number']
 
+class EliminarHorasForm(forms.Form):
+    horas_a_eliminar = forms.IntegerField(min_value=1, label="Horas a eliminar")
+
+

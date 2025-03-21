@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'horas/detalle_aprendiz.css' %}">
+
+{% block content %}
+<div class="detalle-container">
+  <h2>Detalle del Aprendiz: {{ aprendiz.username }}</h2>
+  <p><strong>Nombres:</strong> {{ aprendiz.first_name }} {{ aprendiz.last_name }}</p>
+  <p><strong>Documento:</strong> {{ aprendiz.profile.document_number }}</p>
+  <p><strong>Teléfono:</strong> {{ aprendiz.profile.phone_number }}</p>
+  <p><strong>Total de Horas:</strong> {{ total_horas }}</p>
+  
+  <h3>Registros de Horas</h3>
+  {% if horas %}
+  <table>
+    <thead>
+      <tr>
+         <th>Descripción</th>
+         <th>Fecha</th>
+         <th>Horas</th>
+         <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for h in horas %}
+      <tr>
+         <td>{{ h.descripcion }}</td>
+         <td>{{ h.fecha }}</td>
+         <td>{{ h.horas }}</td>
+         <td>
+           <a href="{% url 'eliminar_horas_parcial' h.pk %}" class="btn-delete">Eliminar</a>
+         </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p>No se encontraron registros de horas.</p>
+  {% endif %}
+</div>
+{% endblock %}

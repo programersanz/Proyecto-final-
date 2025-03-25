@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Horas</title>
+</head>
+<body>
+    <h2>Registro de Horas Lúdicas</h2>
+    <p>Actividad: {{ actividad.nombre }}</p>
+
+    {% if messages %}
+        {% for message in messages %}
+            <p style="color: green;">{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+        <label for="nombres">Nombres:</label>
+        <input type="text" name="nombres" required><br>
+
+        <label for="correo">Correo:</label>
+        <input type="email" name="correo" required><br>
+
+        <label for="identificacion">Número de Identificación:</label>
+        <input type="text" name="identificacion" required><br>
+
+        <button type="submit">Registrar</button>
+    </form>
+</body>
+</html>

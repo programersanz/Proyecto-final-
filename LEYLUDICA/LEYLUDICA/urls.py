@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path
 from horas import views
 from django.contrib.auth import views as auth_views
-from horas.views import home, register, activate, agregar_horas_bienestar, editar_perfil, dashboard_aprendiz, dashboard_bienestar, dashboard_administrativo, agregar_horas_bienestar, EditarHoraView, EliminarHoraView
+from horas.views import home, register, activate, agregar_horas_bienestar, editar_perfil, dashboard_aprendiz, dashboard_bienestar, dashboard_administrativo, agregar_horas_bienestar, EditarHoraView, EliminarHoraView, listar_actividades, detalle_actividad, registrar_horas_qr
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -41,7 +41,9 @@ urlpatterns = [
     path('horas/eliminar/<int:pk>/', EliminarHoraView.as_view(), name='eliminar_horas'),
     path('dashboard/bienestar/detalle_aprendiz/<int:user_id>/', views.detalle_aprendiz, name='detalle_aprendiz'),
     path('horas/eliminar_parcial/<int:pk>/', views.eliminar_horas_parcial, name='eliminar_horas_parcial'),
-
+    path('actividades/', listar_actividades, name='listar_actividades'),
+    path('actividad/<int:actividad_id>/', detalle_actividad, name='detalle_actividad'),
+     path("registrar-horas/<int:actividad_id>/", registrar_horas_qr, name="registrar_horas_qr"),
 
 
 ]

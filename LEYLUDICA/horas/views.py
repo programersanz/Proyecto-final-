@@ -1,6 +1,6 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required, user_passes_test, permission_required
-from .models import HorasLudicas
+from .models import HorasLudicas, Actividad
 from django.contrib.auth.models import User, Group
 from .forms import HorasLudicasForm, RegistroForm, CustomUserCreationForm, HorasLudicasBienestarForm, EditUserForm, EditProfileForm, EliminarHorasForm
 from django.contrib.auth import login
@@ -265,3 +265,33 @@ def eliminar_horas_parcial(request, pk):
         "form": form,
     }
     return render(request, "horas/eliminar_horas_parcial.html", context)
+
+def listar_actividades(request):
+    actividades = Actividad.objects.all()
+    return render(request, "horas/listar_actividades.html", {"actividades": actividades})
+
+def detalle_actividad(request, actividad_id):
+    actividad = get_object_or_404(Actividad, id=actividad_id)
+    return render(request, "horas/detalle_actividad.html", {"actividad": actividad})
+
+def registrar_horas_qr(request, actividad_id):
+    actividad = get_object_or_404(Actividad, id=actividad_id)
+
+    if request.method == "POST":
+        nombres = request.POST.get("nombres")
+        correo = request.POST.get("correo")
+        identificacion = request.POST.get("identificacion")
+
+        if nombres and correo and identificacion:
+            RegistroHoras.objects.create(
+                nombres=nombres,
+                correo=correo,
+                identificacion=identificacion,
+                actividad=actividad
+            )
+            messages.success(request, "Horas registradas correctamente.")
+            return redirect("home")  # Redirige a la página principal o donde prefieras
+        else:
+            messages.error(request, "Todos los campos son obligatorios.")
+
+    return render(request, "horas/registro_qr.html", {"actividad": actividad})

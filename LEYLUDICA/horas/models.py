@@ -1,5 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.files.base import ContentFile
+from io import BytesIO
+
+import qrcode
 
 # Create your models here.
 
@@ -33,3 +37,29 @@ def create_or_update_user_profile(sender, instance, created, **kwargs):
         Profile.objects.create(user=instance)
     else:
         instance.profile.save()
+        
+        
+        
+        
+class Actividad(models.Model):
+    nombre = models.CharField(max_length=200)
+    descripcion = models.TextField()
+    fecha = models.DateField()
+    qr_code = models.ImageField(upload_to='qr_codes/', blank=True, null=True)
+
+    def generar_qr(self):
+        """Genera el código QR con un enlace al formulario de registro de horas lúdicas"""
+        url = f"http://127.0.0.1:8000/registro_qr/{self.id}/"  # Ajusta la URL según tu dominio
+        qr = qrcode.make(url)
+        buffer = BytesIO()
+        qr.save(buffer, format="PNG")
+        self.qr_code.save(f"qr_{self.id}.png", ContentFile(buffer.getvalue()), save=False)
+
+    def save(self, *args, **kwargs):
+        """Sobreescribe el método save para generar el código QR al guardar la actividad"""
+        if not self.qr_code:  # Solo genera el QR si no existe
+            self.generar_qr()
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.nombre

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>{{ actividad.nombre }}</h2>
+<p>{{ actividad.descripcion }}</p>
+<p><strong>Fecha:</strong> {{ actividad.fecha }}</p>
+
+{% if actividad.qr_code %}
+    <h3>Escanea el código QR para registrarte</h3>
+    <img src="{{ actividad.qr_code.url }}" alt="QR de la actividad">
+{% endif %}
+
+{% endblock %}

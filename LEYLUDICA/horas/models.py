@@ -3,7 +3,6 @@ from django.contrib.auth.models import User
 from django.core.files.base import ContentFile
 from io import BytesIO
 
-import qrcode
 
 # Create your models here.
 

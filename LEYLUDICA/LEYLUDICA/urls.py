@@ -43,7 +43,7 @@ urlpatterns = [
     path('horas/eliminar_parcial/<int:pk>/', views.eliminar_horas_parcial, name='eliminar_horas_parcial'),
     path('actividades/', listar_actividades, name='listar_actividades'),
     path('actividad/<int:actividad_id>/', detalle_actividad, name='detalle_actividad'),
-     path("registrar-horas/<int:actividad_id>/", registrar_horas_qr, name="registrar_horas_qr"),
-
+    path("registrar-horas/<int:actividad_id>/", registrar_horas_qr, name="registrar_horas_qr"),
+    path('registro-asistencia/', views.registrar_asistencia, name='registro_asistencia'),
 
 ]

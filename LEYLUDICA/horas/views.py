@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required, user_passes_test, permission_required
 from .models import HorasLudicas, Actividad
 from django.contrib.auth.models import User, Group
-from .forms import HorasLudicasForm, RegistroForm, CustomUserCreationForm, HorasLudicasBienestarForm, EditUserForm, EditProfileForm, EliminarHorasForm
+from .forms import HorasLudicasForm, RegistroForm, CustomUserCreationForm, HorasLudicasBienestarForm, EditUserForm, EditProfileForm, EliminarHorasForm, RegistroAsistenciaForm
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
@@ -295,3 +295,14 @@ def registrar_horas_qr(request, actividad_id):
             messages.error(request, "Todos los campos son obligatorios.")
 
     return render(request, "horas/registro_qr.html", {"actividad": actividad})
+
+def registrar_asistencia(request):
+    if request.method == 'POST':
+        form = RegistroAsistenciaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Asistencia registrada exitosamente.")
+            return redirect('registro_exitoso')  # crea esta vista o cámbiala según tu flujo
+    else:
+        form = RegistroAsistenciaForm()
+    return render(request, 'registro_asistencia.html', {'form': form})

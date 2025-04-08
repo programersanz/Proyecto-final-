@@ -1,5 +1,5 @@
 from django import forms
-from .models import HorasLudicas, Profile
+from .models import HorasLudicas, Profile, RegistroAsistencia
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User, Group 
 
@@ -64,4 +64,23 @@ class EditProfileForm(forms.ModelForm):
 class EliminarHorasForm(forms.Form):
     horas_a_eliminar = forms.IntegerField(min_value=1, label="Horas a eliminar")
 
+class RegistroAsistenciaForm(forms.ModelForm):
+    class Meta:
+        model = RegistroAsistencia
+        fields = [
+            'nombres_completos',
+            'correo',
+            'tipo_documento',
+            'numero_identificacion',
+            'actividad'
+        ]
+        widgets = {
+            'tipo_documento': forms.Select(attrs={'class': 'form-control'}),
+            'numero_identificacion': forms.TextInput(attrs={
+                'class': 'form-control',
+                'pattern': '[0-9]*',
+                'inputmode': 'numeric',
+                'placeholder': 'Solo números'
+            }),
+        }
 

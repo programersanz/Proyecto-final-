@@ -17,16 +17,34 @@
 
     <form method="post">
         {% csrf_token %}
-        <label for="nombres">Nombres:</label>
-        <input type="text" name="nombres" required><br>
+      
+        <label for="nombres">Nombres completos:</label>
+        <input type="text" id="nombres" name="nombres" required>
+
+      <br>
 
         <label for="correo">Correo:</label>
-        <input type="email" name="correo" required><br>
-
-        <label for="identificacion">Número de Identificación:</label>
-        <input type="text" name="identificacion" required><br>
-
+        <input type="email" id="correo" name="correo" required>
+      <br>
+        <label for="tipo_documento">Tipo de documento:</label>
+        <select id="tipo_documento" name="tipo_documento" required>
+          <option value="">--Selecciona uno--</option>
+          <option value="CC">Cédula de Ciudadanía</option>
+          <option value="TI">Tarjeta de Identidad</option>
+        </select>
+      <br>
+        <label for="numero_identificacion">Número de identificación:</label>
+        <input type="text" name="numero_identificacion" pattern="\d*" title="Solo se permiten números" required>
+      
+        <!-- //<label for="actividad">Actividad:</label> -->
+        <!-- <select id="actividad" name="actividad_id" required> -->
+          <!-- <option value="">--Selecciona una--</option> -->
+           {% for actividad in actividades %}
+            <option value="{{ actividad.id }}">{{ actividad.nombre }}</option>
+          {% endfor %}
+        </select>
+      
         <button type="submit">Registrar</button>
-    </form>
+      </form>
 </body>
 </html>

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required, user_passes_test, permission_required
-from .models import HorasLudicas, Actividad
+from .models import HorasLudicas, Actividad, RegistroAsistencia
 from django.contrib.auth.models import User, Group
 from .forms import HorasLudicasForm, RegistroForm, CustomUserCreationForm, HorasLudicasBienestarForm, EditUserForm, EditProfileForm, EliminarHorasForm, RegistroAsistenciaForm
 from django.contrib.auth import login
@@ -278,19 +278,25 @@ def registrar_horas_qr(request, actividad_id):
     actividad = get_object_or_404(Actividad, id=actividad_id)
 
     if request.method == "POST":
-        nombres = request.POST.get("nombres")
+        nombres = request.POST.get("nombres_completos")
         correo = request.POST.get("correo")
-        identificacion = request.POST.get("identificacion")
+        tipo_documento = request.POST.get("tipo_documento")
+        identificacion = request.POST.get("numero_identificacion")
 
-        if nombres and correo and identificacion:
-            RegistroHoras.objects.create(
-                nombres=nombres,
+        if nombres and correo and identificacion and tipo_documento:
+            aprendiz_obj = aprendiz.objects.filter(numero_identificacion=identificacion).first()
+
+            RegistroAsistencia.objects.create(
+                aprendiz=aprendiz_obj,
+                nombres_completos=nombres,
                 correo=correo,
-                identificacion=identificacion,
+                tipo_documento=tipo_documento,
+                numero_identificacion=identificacion,
                 actividad=actividad
             )
-            messages.success(request, "Horas registradas correctamente.")
-            return redirect("home")  # Redirige a la página principal o donde prefieras
+
+            messages.success(request, "Asistencia registrada correctamente.")
+            return redirect("registro_exitoso")
         else:
             messages.error(request, "Todos los campos son obligatorios.")
 
@@ -306,3 +312,6 @@ def registrar_asistencia(request):
     else:
         form = RegistroAsistenciaForm()
     return render(request, 'registro_asistencia.html', {'form': form})
+
+def registro_exitoso(request):
+    return render(request, 'registro_exitoso.html')

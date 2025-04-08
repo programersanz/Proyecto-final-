@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.files.base import ContentFile
 from io import BytesIO
+
 from django.core.validators import RegexValidator
 
 TIPOS_DOCUMENTO = [

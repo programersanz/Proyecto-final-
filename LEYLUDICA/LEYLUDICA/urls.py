@@ -45,5 +45,5 @@ urlpatterns = [
     path('actividad/<int:actividad_id>/', detalle_actividad, name='detalle_actividad'),
     path("registrar-horas/<int:actividad_id>/", registrar_horas_qr, name="registrar_horas_qr"),
     path('registro-asistencia/', views.registrar_asistencia, name='registro_asistencia'),
-
+    path('registro-exitoso/', views.registro_exitoso, name='registro_exitoso'),
 ]

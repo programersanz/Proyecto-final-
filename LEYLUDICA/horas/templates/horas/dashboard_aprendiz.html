@@ -12,17 +12,17 @@
     <table>
       <thead>
         <tr>
-          <th>Descripción</th>
+          <th>Actividad</th>
           <th>Fecha</th>
           <th>Horas</th>
         </tr>
       </thead>
       <tbody>
-        {% for h in horas_ludicas %}
+        {% for registro in registros %}
         <tr>
-          <td>{{ h.descripcion }}</td>
-          <td>{{ h.fecha }}</td>
-          <td>{{ h.horas }}</td>
+          <td>{{ registro.actividad.nombre }}</td>
+          <td>{{ registro.fecha|date:"d-m-Y H:i" }}</td>
+          <td>1</td>
         </tr>
         {% endfor %}
       </tbody>

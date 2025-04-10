@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required, user_passes_test, permission_required
-from .models import HorasLudicas, Actividad, RegistroAsistencia
+from .models import HorasLudicas, Actividad, RegistroAsistencia, Profile
 from django.contrib.auth.models import User, Group
 from .forms import HorasLudicasForm, RegistroForm, CustomUserCreationForm, HorasLudicasBienestarForm, EditUserForm, EditProfileForm, EliminarHorasForm, RegistroAsistenciaForm
 from django.contrib.auth import login
@@ -72,10 +72,12 @@ def dashboard(request):
     
 @login_required
 def dashboard_aprendiz(request):
-    horas = request.user.horas_ludicas.all()
-    total_horas = sum(h.horas for h in horas)
+    perfil = request.user.profile
+    asistencias = RegistroAsistencia.objects.filter(perfil=perfil)
+    total_horas = asistencias.count()  # o usa otro criterio si las horas varían
+
     context = {
-        "horas_ludicas": horas,
+        "registros": asistencias,
         "total_horas": total_horas,
     }
     return render(request, "horas/dashboard_aprendiz.html", context)
@@ -306,9 +308,15 @@ def registrar_asistencia(request):
     if request.method == 'POST':
         form = RegistroAsistenciaForm(request.POST)
         if form.is_valid():
-            form.save()
+            asistencia = form.save(commit=False)
+            try:
+                perfil = Profile.objects.get(document_number=asistencia.numero_identificacion)
+                asistencia.perfil = perfil
+            except Profile.DoesNotExist:
+                asistencia.perfil = None  # o puedes manejar un mensaje si quieres
+            asistencia.save()
             messages.success(request, "Asistencia registrada exitosamente.")
-            return redirect('registro_exitoso')  # crea esta vista o cámbiala según tu flujo
+            return redirect('registro_exitoso')
     else:
         form = RegistroAsistenciaForm()
     return render(request, 'registro_asistencia.html', {'form': form})

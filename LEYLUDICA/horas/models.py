@@ -72,6 +72,7 @@ class Actividad(models.Model):
         return self.nombre
     
 class RegistroAsistencia(models.Model):
+    perfil = models.ForeignKey("Profile", on_delete=models.SET_NULL, null=True, blank=True)  # NUEVO
     nombres_completos = models.CharField(max_length=150)
     correo = models.EmailField()
     tipo_documento = models.CharField(max_length=2, choices=TIPOS_DOCUMENTO)

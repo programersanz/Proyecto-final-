@@ -17,7 +17,7 @@ from django.contrib import messages
 from django.urls import reverse_lazy
 from django.views.generic import UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
-
+from django.utils import timezone
 
 # Create your views here.
 
@@ -312,9 +312,20 @@ def registrar_asistencia(request):
             try:
                 perfil = Profile.objects.get(document_number=asistencia.numero_identificacion)
                 asistencia.perfil = perfil
+                asistencia.save()
+
+                # 🟢 Crear la entrada de HorasLudicas si hay un usuario asociado al perfil
+                if perfil.user:
+                    HorasLudicas.objects.create(
+                        descripcion=f"Asistencia a {asistencia.actividad.nombre}",
+                        horas=asistencia.actividad.valor_horas,  # Usa las horas de la actividad
+                        fecha=timezone.now().date(),
+                        usuario=perfil.user
+                    )
             except Profile.DoesNotExist:
-                asistencia.perfil = None  # o puedes manejar un mensaje si quieres
-            asistencia.save()
+                asistencia.perfil = None
+                asistencia.save()
+
             messages.success(request, "Asistencia registrada exitosamente.")
             return redirect('registro_exitoso')
     else:

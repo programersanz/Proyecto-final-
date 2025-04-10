@@ -5,6 +5,8 @@ from io import BytesIO
 
 from django.core.validators import RegexValidator
 
+import qrcode
+
 TIPOS_DOCUMENTO = [
     ('CC', 'Cédula de Ciudadanía'),
     ('TI', 'Tarjeta de Identidad'),
@@ -52,19 +54,19 @@ class Actividad(models.Model):
     nombre = models.CharField(max_length=200)
     descripcion = models.TextField()
     fecha = models.DateField()
+    horas = models.PositiveIntegerField(default=1)  # 👈 Este campo es nuevo
+    valor_horas = models.PositiveIntegerField(default=1)  # << Este campo
     qr_code = models.ImageField(upload_to='qr_codes/', blank=True, null=True)
 
     def generar_qr(self):
-        """Genera el código QR con un enlace al formulario de registro de horas lúdicas"""
-        url = f"http://127.0.0.1:8000/registro_qr/{self.id}/"  # Ajusta la URL según tu dominio
+        url = f"http://127.0.0.1:8000/registro_qr/{self.id}/"
         qr = qrcode.make(url)
         buffer = BytesIO()
         qr.save(buffer, format="PNG")
         self.qr_code.save(f"qr_{self.id}.png", ContentFile(buffer.getvalue()), save=False)
 
     def save(self, *args, **kwargs):
-        """Sobreescribe el método save para generar el código QR al guardar la actividad"""
-        if not self.qr_code:  # Solo genera el QR si no existe
+        if not self.qr_code:
             self.generar_qr()
         super().save(*args, **kwargs)
 

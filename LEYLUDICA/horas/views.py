@@ -18,7 +18,7 @@ from django.urls import reverse_lazy
 from django.views.generic import UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils import timezone
-
+from django.db.models import Sum
 # Create your views here.
 
 def es_aprendiz(user):
@@ -72,12 +72,13 @@ def dashboard(request):
     
 @login_required
 def dashboard_aprendiz(request):
-    perfil = request.user.profile
-    asistencias = RegistroAsistencia.objects.filter(perfil=perfil)
-    total_horas = asistencias.count()  # o usa otro criterio si las horas varían
+    # Consulta todas las horas lúdicas asociadas al usuario (ya que en ambos casos se asigna a `usuario`)
+    horas_ludicas = HorasLudicas.objects.filter(usuario=request.user)
+    # Suma el campo 'horas'. Si no hay entradas, el total será 0.
+    total_horas = horas_ludicas.aggregate(total=Sum('horas'))['total'] or 0
 
     context = {
-        "registros": asistencias,
+        "horas_ludicas": horas_ludicas,
         "total_horas": total_horas,
     }
     return render(request, "horas/dashboard_aprendiz.html", context)

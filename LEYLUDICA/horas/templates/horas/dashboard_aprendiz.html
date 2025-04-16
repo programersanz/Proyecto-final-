@@ -18,11 +18,11 @@
         </tr>
       </thead>
       <tbody>
-        {% for registro in registros %}
+        {% for registro in horas_ludicas %}
         <tr>
-          <td>{{ registro.actividad.nombre }}</td>
-          <td>{{ registro.fecha|date:"d-m-Y H:i" }}</td>
-          <td>1</td>
+          <td>{{ registro.descripcion }}</td>
+          <td>{{ registro.fecha|date:"d-m-Y" }}</td>
+          <td>{{ registro.horas }}</td>
         </tr>
         {% endfor %}
       </tbody>

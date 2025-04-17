@@ -5,9 +5,17 @@
 {% block content %}
 <div class="dashboard-container">
   <h2>Dashboard Aprendiz</h2>
+
+  {% if mensaje_ranking %}
+    <div class="ranking-message" style="margin-top: 10px; padding: 10px; background-color: #e0ffe0; border-left: 4px solid green;">
+      <p style="font-weight: bold; color: green;">{{ mensaje_ranking }}</p>
+    </div>
+  {% endif %}
+
   <div class="hours-summary">
     <h3>Total de Horas: {{ total_horas }}</h3>
   </div>
+
   <div class="hours-list">
     <table>
       <thead>
@@ -28,5 +36,25 @@
       </tbody>
     </table>
   </div>
+</div>
+
+<div class="ranking-section">
+  <h3>Ranking de Asistencias</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Aprendiz</th>
+        <th>Total de Asistencias</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in ranking_asistencias %}
+      <tr>
+        <td>{{ item.perfil__user__first_name }} {{ item.perfil__user__last_name }}</td>
+        <td>{{ item.total_asistencias }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 </div>
 {% endblock %}

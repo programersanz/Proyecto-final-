@@ -18,7 +18,7 @@ from django.urls import reverse_lazy
 from django.views.generic import UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils import timezone
-from django.db.models import Sum
+from django.db.models import Sum, Count
 # Create your views here.
 
 def es_aprendiz(user):
@@ -72,15 +72,38 @@ def dashboard(request):
     
 @login_required
 def dashboard_aprendiz(request):
-    # Consulta todas las horas lúdicas asociadas al usuario (ya que en ambos casos se asigna a `usuario`)
+    # Horas lúdicas del usuario
     horas_ludicas = HorasLudicas.objects.filter(usuario=request.user)
-    # Suma el campo 'horas'. Si no hay entradas, el total será 0.
     total_horas = horas_ludicas.aggregate(total=Sum('horas'))['total'] or 0
+
+    # Ranking de los 10 perfiles con más asistencias
+    ranking_asistencias = (
+        RegistroAsistencia.objects
+        .filter(perfil__user__isnull=False)
+        .values('perfil__user__first_name', 'perfil__user__last_name', 'perfil__user__id')
+        .annotate(total_asistencias=Count('id'))
+        .order_by('-total_asistencias')[:10]
+    )
+
+    # Verificamos si el usuario está en el top 3
+    mensaje_ranking = None
+    for posicion, item in enumerate(ranking_asistencias):
+        if item['perfil__user__id'] == request.user.id:
+            if posicion == 0:
+                mensaje_ranking = "🏆 ¡FELICIDADES! ESTÁS EN EL PRIMER LUGAR DEL RANKING DE ASISTENCIAS"
+            elif posicion == 1:
+                mensaje_ranking = "🥈 ¡GENIAL! ESTÁS EN EL SEGUNDO LUGAR DEL RANKING"
+            elif posicion == 2:
+                mensaje_ranking = "🥉 ¡MUY BIEN! ESTÁS EN EL TERCER LUGAR DEL RANKING"
+            break
 
     context = {
         "horas_ludicas": horas_ludicas,
         "total_horas": total_horas,
+        "ranking_asistencias": ranking_asistencias,
+        "mensaje_ranking": mensaje_ranking,
     }
+
     return render(request, "horas/dashboard_aprendiz.html", context)
 
 
@@ -319,19 +342,48 @@ def registrar_asistencia(request):
                 if perfil.user:
                     HorasLudicas.objects.create(
                         descripcion=f"Asistencia a {asistencia.actividad.nombre}",
-                        horas=asistencia.actividad.valor_horas,  # Usa las horas de la actividad
+                        horas=asistencia.actividad.valor_horas,
                         fecha=timezone.now().date(),
                         usuario=perfil.user
                     )
-            except Profile.DoesNotExist:
-                asistencia.perfil = None
-                asistencia.save()
 
-            messages.success(request, "Asistencia registrada exitosamente.")
-            return redirect('registro_exitoso')
+                messages.success(request, "Asistencia registrada exitosamente.")
+                return redirect('registro_exitoso')
+
+            except Profile.DoesNotExist:
+                # ❌ No guardar asistencia si no hay perfil
+                messages.error(request, "El número de documento no está asociado a ningún perfil.")
+                return redirect('registro_asistencia')  # o podrías quedarte en la misma página
     else:
         form = RegistroAsistenciaForm()
     return render(request, 'registro_asistencia.html', {'form': form})
 
 def registro_exitoso(request):
     return render(request, 'registro_exitoso.html')
+
+@login_required
+def ranking_aprendices(request):
+    ranking_raw = (
+        Profile.objects
+        .filter(user__isnull=False)
+        .annotate(total_asistencias=Count('registroasistencia'))
+        .order_by('-total_asistencias')[:10]
+    )
+
+    ranking = []
+    for i, perfil in enumerate(ranking_raw):
+        mensaje = ""
+        if i == 0:
+            mensaje = "🎉 ¡FELICIDADES! ESTÁS EN EL PRIMER LUGAR"
+        elif i == 1:
+            mensaje = "🥈 ¡Muy bien! Estás en el segundo lugar"
+        elif i == 2:
+            mensaje = "🥉 ¡Buen trabajo! Tercer lugar del ranking"
+
+        ranking.append({
+            'perfil': perfil,
+            'total_asistencias': perfil.total_asistencias,
+            'mensaje': mensaje
+        })
+
+    return render(request, 'horas/ranking_aprendices.html', {'ranking': ranking})

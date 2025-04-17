@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="ranking-container">
+  <h2>Top 10 Aprendices con más Asistencias</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Posición</th>
+        <th>Nombre</th>
+        <th>Documento</th>
+        <th>Total de Asistencias</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in ranking %}
+<tr>
+  <td>{{ forloop.counter }}</td>
+  <td>{{ item.perfil.user.get_full_name }}</td>
+  <td>{{ item.perfil.document_number }}</td>
+  <td>{{ item.total_asistencias }}</td>
+</tr>
+{% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

@@ -46,4 +46,6 @@ urlpatterns = [
     path("registrar-horas/<int:actividad_id>/", registrar_horas_qr, name="registrar_horas_qr"),
     path('registro-asistencia/', views.registrar_asistencia, name='registro_asistencia'),
     path('registro-exitoso/', views.registro_exitoso, name='registro_exitoso'),
+    path('ranking/', views.ranking_aprendices, name='ranking_aprendices'),
+
 ]

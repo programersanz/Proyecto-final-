@@ -1,0 +1,65 @@
+/* Contenedor principal del ranking */
+.ranking-container {
+    width: 90%;
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 25px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+  }
+  
+  /* Título centrado */
+  .ranking-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #045d1f;
+  }
+  
+  /* Tabla */
+  .ranking-container table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  /* Encabezados */
+  .ranking-container th {
+    background-color: #eaeaea;
+    padding: 12px;
+    text-align: left;
+    font-weight: bold;
+    border-bottom: 2px solid #ccc;
+  }
+  
+  /* Celdas */
+  .ranking-container td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  /* Alternar color de filas */
+  .ranking-container tbody tr:nth-child(even) {
+    background-color: #f5f5f5;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .ranking-container {
+      padding: 15px;
+    }
+  
+    .ranking-container table {
+      font-size: 14px;
+    }
+  
+    .ranking-container th,
+    .ranking-container td {
+      padding: 10px;
+    }
+  }
+  

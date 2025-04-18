@@ -1,39 +1,41 @@
 body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #e8f5e9;
+    font-family: Arial, sans-serif;
+    background-color: #ccc; /* Verde muy claro, más cercano al estilo "lightgreen" suave */
     margin: 0;
     padding: 0;
 }
 
 .register-container {
     align-items: center;
-    max-width: 400px;
+    max-width: 500px;
     width: 90%;
     margin: 80px auto;
-    padding: auto;
+    padding: 0;
 }
 
 .register-container h2 {
     text-align: center;
-    color: #007a33;
+    color: black;
     margin-bottom: 20px;
     font-size: 1.5rem;
 }
 
 form {
-    background-color: #fff;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9; /* Color claro como en el dashboard */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Estilo suave */
+    width: 100%;
+    box-sizing: border-box;
 }
 
 form p {
     margin-bottom: 15px;
-    color: #333;
+    color: black; /* Texto oscuro para contraste */
 }
 
 form p label {
-    font-weight: 600;
+    font-weight: bold;
 }
 
 form input {
@@ -45,31 +47,39 @@ form input {
     font-size: 14px;
     outline: none;
     transition: border 0.3s ease;
+    box-sizing: border-box;
 }
 
 form input:focus {
-    border: 1px solid #007a33;
+    border: 1px solid black;
 }
 
 form button {
     width: 100%;
     padding: 12px;
-    background-color: #007a33;
-    color: white;
+    background-color: lightgreen; /* Igual que .ranking-message */
+    color: black;
     border: none;
+    border-left: 5px solid black; /* Estilo inspirado en .ranking-message */
     border-radius: 5px;
     font-size: 16px;
     cursor: pointer;
     margin-top: 20px;
     transition: background 0.3s ease, box-shadow 0.3s ease;
+    font-weight: bold;
+    box-sizing: border-box;
 }
 
 form button:hover {
-    background-color: #005f27;
+    background-color: #a8e6a1;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
 }
 
 @media (max-width: 480px) {
+    .register-container {
+        max-width: 90%;
+    }
+
     .register-container h2 {
         font-size: 1.2rem;
     }

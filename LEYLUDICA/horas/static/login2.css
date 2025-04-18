@@ -2,22 +2,23 @@ body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f0f2f5;
+    background-color: #ccc; /* Fondo gris claro */
 }
 
 .login-container {
-    max-width: 400px;
+    max-width: 500px; /* Más ancho que antes */
     width: 90%;
-    margin: 100px auto;
-    background: #fff;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    margin: 80px auto;
+    background: #f9f9f9; /* Fondo clarito del formulario */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
     border-radius: 10px;
     text-align: center;
-    padding: 30px;
+    padding: 20px; /* Menos padding para que aproveche más el espacio */
+    box-sizing: border-box;
 }
 
 .login-container h2 {
-    color: #006400;
+    color: black; /* Título en negro */
     font-size: 1.5rem;
     margin-bottom: 20px;
 }
@@ -27,12 +28,19 @@ form {
     flex-direction: column;
     align-items: stretch;
     margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 form p {
     margin-bottom: 15px;
     text-align: left;
-    color: #333;
+    color: black; /* Texto negro */
+    font-size: 15px;
+}
+
+form p label {
+    font-weight: bold;
 }
 
 input[type="text"],
@@ -44,30 +52,36 @@ input[type="email"] {
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 14px;
+    background-color: #fafafa;
     transition: border 0.3s ease;
+    box-sizing: border-box;
 }
 
 input[type="text"]:focus,
 input[type="password"]:focus,
 input[type="email"]:focus {
-    border: 1px solid #006400;
+    border: 1px solid black; /* Borde negro al enfocar */
     outline: none;
 }
 
 .login-btn {
-    background-color: #006400;
-    color: #fff;
+    width: 100%;
     padding: 12px;
+    background-color: lightgreen; /* Botón verde claro */
+    color: black;
     border: none;
+    border-left: 5px solid black; /* Estilo "dashboard" */
     border-radius: 5px;
-    cursor: pointer;
     font-size: 16px;
-    margin-top: 10px;
+    cursor: pointer;
+    margin-top: 20px;
+    font-weight: bold;
     transition: background 0.3s ease, box-shadow 0.3s ease;
+    box-sizing: border-box;
 }
 
 .login-btn:hover {
-    background-color: #004d00;
+    background-color: #a8e6a1; /* Verde más suave al pasar el mouse */
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
 }
 
@@ -78,10 +92,17 @@ input[type="email"]:focus {
     }
 
     .login-container h2 {
-        font-size: 1.2rem;
+        font-size: 1.3rem;
     }
 
     form p {
+        font-size: 14px;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    input[type="email"],
+    .login-btn {
         font-size: 14px;
     }
 }

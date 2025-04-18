@@ -1,51 +1,78 @@
+/* Contenedor principal */
 .dashboard-container {
-    max-width: 1000px;
-    margin: 60px auto;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
     padding: 20px;
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+  }
+  
+  /* Mensaje del ranking */
+  .ranking-message {
+    margin-top: 10px;
+    padding: 15px;
+    background-color: #d4fddc;
+    border-left: 5px solid green;
+    font-weight: bold;
+    color: #045d1f;
+    border-radius: 5px;
+  }
+  
+  /* Contenedor de las tablas: FLEX para alinear lado a lado */
+  .tables-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+  }
+  
+  /* Contenedores individuales */
+  .hours-table-container,
+  .ranking-table-container {
+    flex: 0 0 48%;
     background-color: #f9f9f9;
+    padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-
-.dashboard-container h2 {
-    color: #007a33;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    min-width: 300px;
+    box-sizing: border-box;
+  }
+  
+  /* Títulos */
+  h2, h3 {
+    margin-bottom: 15px;
     text-align: center;
-    margin-bottom: 20px;
-}
-
-.search-bar {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.search-bar input[type="text"] {
-    width: 300px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.search-bar button {
-    padding: 10px 15px;
-    background-color: #007a33;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.aprendices-list table {
+  }
+  
+  /* Tablas */
+  table {
     width: 100%;
     border-collapse: collapse;
-}
-
-.aprendices-list th, .aprendices-list td {
-    padding: 12px;
+  }
+  
+  th, td {
+    padding: 10px;
     border: 1px solid #ccc;
     text-align: left;
-}
-
-.aprendices-list th {
-    background-color: #007a33;
-    color: white;
-}
+  }
+  
+  th {
+    background-color: #eaeaea;
+  }
+  
+  /* Responsive: apilar tablas en pantallas pequeñas */
+  @media (max-width: 768px) {
+    .tables-container {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .hours-table-container,
+    .ranking-table-container {
+      flex: 1 1 100%;
+      max-width: 90%;
+    }
+  }
+  

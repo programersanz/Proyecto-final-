@@ -82,18 +82,11 @@ WSGI_APPLICATION = 'LEYLUDICA.LEYLUDICA.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+import dj_database_url
+import os
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'ProjectLeyLudica',  # Nombre de la base de datos
-        'USER': 'ProjectLeyLudica_owner',  # Usuario
-        'PASSWORD': 'npg_mGy20qdcOXJE',  # Contraseña
-        'HOST': 'ep-winter-heart-a8kjdu86-pooler.eastus2.azure.neon.tech',  # Host
-        'PORT': '5432',  # Puerto, por defecto PostgreSQL utiliza el 5432
-        'OPTIONS': {
-            'sslmode': 'require',  # Forzamos conexión segura
-        },
-    }
+    'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
 }
 
 import dj_database_url

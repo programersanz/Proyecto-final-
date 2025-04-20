@@ -3,5 +3,5 @@ from django.apps import AppConfig
 
 class HorasConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'horas'
+    name = 'LEYLUDICA.horas'
 

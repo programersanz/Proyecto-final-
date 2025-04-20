@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'horas',
+    'LEYLUDICA.horas'
     
     
 ]
@@ -53,7 +53,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'LEYLUDICA.urls'
+ROOT_URLCONF = 'LEYLUDICA.LEYLUDICA.urls'
 
 TEMPLATES = [
     {
@@ -66,13 +66,13 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'horas.context_processors.user_groups',
+                'LEYLUDICA.horas.context_processors.user_groups',
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = 'LEYLUDICA.wsgi.application'
+WSGI_APPLICATION = 'LEYLUDICA.LEYLUDICA.wsgi.application'
 
 
 # Database
@@ -95,7 +95,9 @@ DATABASES = {
 import dj_database_url
 import os
 
-DATABASES['default'] = dj_database_url.config(default=os.environ.get('DATABASE_URL'))
+DATABASE_URL = os.environ.get('DATABASE_URL')
+if DATABASE_URL:
+    DATABASES['default'] = dj_database_url.config(default=DATABASE_URL)
 
 
 

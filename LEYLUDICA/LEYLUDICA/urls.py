@@ -16,9 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from horas import views
+from LEYLUDICA.horas import views
 from django.contrib.auth import views as auth_views
-from horas.views import home, register, activate, agregar_horas_bienestar, editar_perfil, dashboard_aprendiz, dashboard_bienestar, dashboard_administrativo, agregar_horas_bienestar, EditarHoraView, EliminarHoraView, listar_actividades, detalle_actividad, registrar_horas_qr
+from LEYLUDICA.horas.views import home, register, activate, agregar_horas_bienestar, editar_perfil, dashboard_aprendiz, dashboard_bienestar, dashboard_administrativo, agregar_horas_bienestar, EditarHoraView, EliminarHoraView, listar_actividades, detalle_actividad, registrar_horas_qr
 
 urlpatterns = [
     path('admin/', admin.site.urls),

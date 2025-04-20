@@ -27,6 +27,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://leyludicafinal-ekhhe7csaac3a2br.eastus-01.azurewebsites.net"
+]
+
 
 # Application definition
 

@@ -9,6 +9,7 @@
   {% block extra_css %}{% endblock %}
 </head>
 <body>
+<div class="site-wrapper">
 <nav class="navbar">
   <div class="navbar-container">
     <div class="left-section">
@@ -57,5 +58,12 @@
   <div class="content">
     {% block content %}{% endblock %}
   </div>
+
+  <footer class="site-footer">
+    <div class="footer-container">
+      <p>&copy; {{ now.year }} Ley Lúdica. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+</div>
 </body>
 </html>

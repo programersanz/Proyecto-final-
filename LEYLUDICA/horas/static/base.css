@@ -1,6 +1,17 @@
 /* Reset simple */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html, body { height: 100%; font-family: 'Poppins', sans-serif; }
+html, body { height: 100%;   margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
+
+.site-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Hace que el contenido crezca y empuje el footer hacia abajo */
+.content {
+  flex: 1;
+}
 
 /* Navbar full width */
 .navbar {
@@ -8,6 +19,7 @@ html, body { height: 100%; font-family: 'Poppins', sans-serif; }
   width: 100%;
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
   padding: 15px 0;
+  border-bottom: 3px solid #13773b;
 }
 
 /* Centered inner container */
@@ -26,15 +38,17 @@ html, body { height: 100%; font-family: 'Poppins', sans-serif; }
   align-items: center;
 }
 .logo-img {
-  height: 40px;
+  height: 50px;
   margin-right: 10px;
+  opacity: 90%;
+  border-radius: 3px;
 }
 .logo-text {
-  font-size: 24px;
+  font-size: 22px;
   font-weight: bold;
   color: white;
   text-decoration: none;
-  margin-right: 20px;
+  margin-right: auto;
 }
 
 .nav-links {
@@ -72,6 +86,52 @@ html, body { height: 100%; font-family: 'Poppins', sans-serif; }
 
 .content { padding: 20px; }
 
+.site-footer {
+  background-color: #4a4a4a;  /* mismo fondo que tu navbar */
+  color: #e0e0e0;
+  padding: 20px 0;
+  margin-top: 40px;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  text-align: center;        /* <-- todo centrado */
+}
+
+.footer-container p {
+  margin: 0 0 10px;          /* separación debajo del texto */
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: inline-flex;      /* centra la lista */
+  gap: 15px;
+}
+
+.footer-links a {
+  color: #e0e0e0;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-links a:hover {
+  color: #ffffff;
+}
+
+
+html, body {
+  height: 100%;
+}
+.content {
+  min-height: calc(100vh - /* altura nav + footer */ 130px);
+}
+
+
+
+
 /* Responsive navbar */
 @media (max-width: 768px) {
   .nav-links {
@@ -83,4 +143,13 @@ html, body { height: 100%; font-family: 'Poppins', sans-serif; }
   }
   .nav-links a, .logout-btn { font-size: 14px; padding: 4px 8px; }
   .logo-text { font-size: 20px; }
+}
+
+/* Responsive para footer */
+@media (max-width: 600px) {
+  .footer-container {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
 }

@@ -2,6 +2,7 @@ from django import forms
 from .models import HorasLudicas, Profile, RegistroAsistencia
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User, Group 
+from django.core.validators import RegexValidator
 
 class HorasLudicasForm(forms.ModelForm):
     class Meta:
@@ -18,16 +19,50 @@ class RegistroForm(UserCreationForm):
         fields = ["username", "email", "password1", "password2"]
 
 class CustomUserCreationForm(UserCreationForm):
-    document_number = forms.CharField(max_length=20, required=True, label="Número de documento")
-    email = forms.EmailField(required=True, label="Correo electrónico")
-    first_name = forms.CharField(max_length=30, required=True, label="Nombres")
-    last_name = forms.CharField(max_length=30, required=True, label="Apellidos")
-    phone_number = forms.CharField(max_length=20, required=True, label="Número de teléfono")
-    
+    username = forms.CharField(
+        max_length=150,
+        label="Nombre de usuario",
+        help_text="150 caracteres como máximo. Letras, dígitos y @/./+/-/_ sólo.",
+    )
+    email = forms.EmailField(
+        required=True,
+        label="Correo electrónico",
+        help_text="Introduce un email válido.",
+    )
+    first_name = forms.CharField(
+        max_length=30,
+        required=True,
+        label="Nombres",
+    )
+    last_name = forms.CharField(
+        max_length=30,
+        required=True,
+        label="Apellidos",
+    )
+    document_number = forms.CharField(
+        max_length=20,
+        required=True,
+        label="Número de documento",
+        validators=[
+            RegexValidator(regex=r'^\d+$', message="Solo se permiten dígitos en el documento.")
+        ]
+    )
+    phone_number = forms.CharField(
+        max_length=15,
+        required=True,
+        label="Número de teléfono",
+        validators=[
+            RegexValidator(regex=r'^\d{10}$', message="El teléfono debe ser de 10 digitos.")
+        ]
+    )
+
     class Meta:
         model = User
-        fields = ("username", "email", "first_name", "last_name", "document_number", "phone_number", "password1", "password2")
-    
+        fields = (
+            "username", "email", "first_name", "last_name",
+            "document_number", "phone_number", "password1", "password2"
+        )
+
     def save(self, commit=True):
         user = super().save(commit=False)
         user.email = self.cleaned_data["email"]
@@ -35,7 +70,6 @@ class CustomUserCreationForm(UserCreationForm):
         user.last_name = self.cleaned_data["last_name"]
         if commit:
             user.save()
-            # Guardamos los datos extras en el perfil (la señal se encargará de crearlo si no existe)
             user.profile.document_number = self.cleaned_data["document_number"]
             user.profile.phone_number = self.cleaned_data["phone_number"]
             user.profile.save()

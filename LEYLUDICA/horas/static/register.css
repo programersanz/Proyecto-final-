@@ -1,95 +1,43 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #ccc; /* Verde muy claro, más cercano al estilo "lightgreen" suave */
-    margin: 0;
-    padding: 0;
-}
+/* Box-sizing global */ *, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
 
-.register-container {
-    align-items: center;
-    max-width: 500px;
-    width: 90%;
-    margin: 80px auto;
-    padding: 0;
+.form-container {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 20px 30px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  font-family: Arial, sans-serif;
 }
-
-.register-container h2 {
-    text-align: center;
-    color: black;
-    margin-bottom: 20px;
-    font-size: 1.5rem;
+.form-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #007a33;
 }
-
-form {
-    background-color: #f9f9f9; /* Color claro como en el dashboard */
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Estilo suave */
-    width: 100%;
-    box-sizing: border-box;
+.field { margin-bottom: 15px; }
+.field label { display: block; font-weight: bold; margin-bottom: 5px; }
+.field input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
-
-form p {
-    margin-bottom: 15px;
-    color: black; /* Texto oscuro para contraste */
+.field .helptext { display: block; font-size: 0.9em; color: #666; margin-top: 4px; }
+.field .errorlist { margin-top: 4px; color: #c82333; font-size: 0.9em; }
+.btn-submit {
+  width: 100%;
+  padding: 12px;
+  background-color: #00c851;
+  color: white;
+  font-size: 1.1em;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
 }
-
-form p label {
-    font-weight: bold;
-}
-
-form input {
-    width: 100%;
-    padding: 12px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 14px;
-    outline: none;
-    transition: border 0.3s ease;
-    box-sizing: border-box;
-}
-
-form input:focus {
-    border: 1px solid black;
-}
-
-form button {
-    width: 100%;
-    padding: 12px;
-    background-color: lightgreen; /* Igual que .ranking-message */
-    color: black;
-    border: none;
-    border-left: 5px solid black; /* Estilo inspirado en .ranking-message */
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 20px;
-    transition: background 0.3s ease, box-shadow 0.3s ease;
-    font-weight: bold;
-    box-sizing: border-box;
-}
-
-form button:hover {
-    background-color: #a8e6a1;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
-}
-
+.btn-submit:hover { background-color: #007a33; }
 @media (max-width: 480px) {
-    .register-container {
-        max-width: 90%;
-    }
-
-    .register-container h2 {
-        font-size: 1.2rem;
-    }
-
-    form p {
-        font-size: 14px;
-    }
-
-    form input,
-    form button {
-        font-size: 14px;
-    }
+  .form-container { padding: 15px; }
+  .btn-submit { font-size: 1em; }
 }

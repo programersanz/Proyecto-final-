@@ -1,13 +1,22 @@
 {% extends "base.html" %}
 {% load static %}
-
 {% block content %}
-<div class="container">
-  <h2>Agregar horas a un Aprendiz</h2>
-  <form method="post">
+
+<!-- Tipografía y estilo -->
+<link rel="preconnect" href="https://fonts.gstatic.com" />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="{% static 'agregar_horas.css' %}">
+
+<!-- Contenido principal -->
+<div class="agregar-horas-container">
+  <h2>Agregar Horas a un Aprendiz</h2>
+
+  <form method="post" class="formulario-horas">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit" class="btn btn-success">Guardar</button>
+
+    <button type="submit" class="btn-guardar">Guardar</button>
   </form>
 </div>
+
 {% endblock %}

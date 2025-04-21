@@ -1,38 +1,43 @@
 {% extends "base.html" %}
 {% load static %}
-
 {% block content %}
 <link rel="stylesheet" href="{% static 'ver_perfil.css' %}">
 
 <div class="perfil-detalle">
-    <h2>Mi Perfil</h2>
+    <!-- Imagen de perfil -->
+    <div class="perfil-img">
+        <img src="{% static 'img/perfil.png' %}" alt="Foto de perfil">
+    </div>
+
+    <!-- Nombre del usuario -->
+    <h2>{{ user.first_name }} {{ user.last_name }}</h2>
+    <p class="perfil-rol">@{{ user.username }} | Usuario registrado</p>
+
+    <!-- Tabla con detalles -->
     <div class="tabla-perfil-container">
         <table class="tabla-perfil">
             <tr>
                 <th>Campo</th>
-                <th>Valor</th>
+                <th>Información</th>
             </tr>
             <tr>
-                <td>Usuario</td>
-                <td>{{ user.username }}</td>
-            </tr>
-            <tr>
-                <td>Nombres</td>
-                <td>{{ user.first_name }} {{ user.last_name }}</td>
-            </tr>
-            <tr>
-                <td>Email</td>
+                <td>Correo electrónico</td>
                 <td>{{ user.email }}</td>
             </tr>
             <tr>
-                <td>Número de documento</td>
+                <td>Documento</td>
                 <td>{{ user.profile.document_number }}</td>
             </tr>
             <tr>
-                <td>Número de teléfono</td>
+                <td>Teléfono</td>
                 <td>{{ user.profile.phone_number }}</td>
+            </tr>
+            <tr>
+                <td>Fecha de registro</td>
+                <td>{{ user.date_joined|date:"d/m/Y" }}</td>
             </tr>
         </table>
     </div>
+
 </div>
 {% endblock %}

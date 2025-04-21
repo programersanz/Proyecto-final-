@@ -1,31 +1,53 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
 .confirm-container {
-    max-width: 400px;
-    margin: 40px auto;
-    padding: 20px;
+    max-width: 500px;
+    margin: 60px auto;
+    padding: 30px;
     background-color: #fff5f5;
     border: 1px solid #f5c6cb;
-    border-radius: 8px;
+    border-radius: 10px;
     text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
 .confirm-container h2 {
     color: #c82333;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+    font-size: 24px;
 }
 
-.confirm-container p {
-    margin-bottom: 15px;
+.registro-info p {
     font-size: 16px;
+    color: #333;
+    margin-bottom: 12px;
+}
+
+form {
+    margin-top: 20px;
+}
+
+.btn-group {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
 }
 
 .btn-delete {
     background-color: #c82333;
     color: white;
-    padding: 10px 20px;
+    padding: 10px 24px;
     border: none;
-    border-radius: 5px;
+    border-radius: 6px;
+    font-weight: bold;
     cursor: pointer;
-    margin-right: 10px;
+    transition: background-color 0.3s ease;
 }
 
 .btn-delete:hover {
@@ -35,9 +57,11 @@
 .btn-cancel {
     background-color: #6c757d;
     color: white;
-    padding: 10px 20px;
+    padding: 10px 24px;
     text-decoration: none;
-    border-radius: 5px;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
 }
 
 .btn-cancel:hover {

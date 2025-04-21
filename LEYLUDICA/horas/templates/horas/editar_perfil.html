@@ -1,21 +1,29 @@
 {% extends "base.html" %}
 {% load static %}
-<link rel="stylesheet" href="{% static 'horas/editar_perfil.css' %}">
-
 {% block content %}
+<link rel="stylesheet" href="{% static 'editar_perfil.css' %}">
+
 <div class="perfil-container">
     <h2>Editar Perfil</h2>
-    <form method="post">
+    <p class="descripcion">Modifica tus datos personales y haz clic en <strong>"Guardar cambios"</strong> para actualizar tu información.</p>
+
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
+
         <fieldset>
             <legend>Datos de Usuario</legend>
             {{ user_form.as_p }}
         </fieldset>
+
         <fieldset>
             <legend>Datos de Perfil</legend>
             {{ profile_form.as_p }}
         </fieldset>
-        <button type="submit">Guardar cambios</button>
+
+        <div class="acciones-formulario">
+            <button type="submit">Guardar cambios</button>
+            <a href="{% url 'ver_perfil' %}" class="btn-cancelar">Cancelar</a>
+        </div>
     </form>
 </div>
 {% endblock %}

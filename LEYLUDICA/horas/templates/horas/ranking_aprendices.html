@@ -1,10 +1,15 @@
 {% extends "base.html" %}
 {% load static %}
+{% block content %}
+<!-- Tipografía y estilos -->
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{% static 'ranking_aprendices.css' %}">
 
-{% block content %}
 <div class="ranking-container">
-  <h2>Top 10 Aprendices con más Asistencias</h2>
+  <h2>Top 10 Aprendices con Más Asistencias</h2>
+
+  {% if ranking %}
   <table>
     <thead>
       <tr>
@@ -12,19 +17,31 @@
         <th>Nombre</th>
         <th>Documento</th>
         <th>Total de Asistencias</th>
-        
       </tr>
     </thead>
     <tbody>
       {% for item in ranking %}
-<tr>
-  <td>{{ forloop.counter }}</td>
-  <td>{{ item.perfil.user.get_full_name }}</td>
-  <td>{{ item.perfil.document_number }}</td>
-  <td>{{ item.total_asistencias }}</td>
-</tr>
-{% endfor %}
+      <tr>
+        <td>
+          {% if forloop.counter == 1 %}
+            🥇
+          {% elif forloop.counter == 2 %}
+            🥈
+          {% elif forloop.counter == 3 %}
+            🥉
+          {% else %}
+            {{ forloop.counter }}
+          {% endif %}
+        </td>
+        <td>{{ item.perfil.user.get_full_name }}</td>
+        <td>{{ item.perfil.document_number }}</td>
+        <td>{{ item.total_asistencias }}</td>
+      </tr>
+      {% endfor %}
     </tbody>
   </table>
+  {% else %}
+    <p class="no-results">No hay registros de asistencia disponibles.</p>
+  {% endif %}
 </div>
 {% endblock %}

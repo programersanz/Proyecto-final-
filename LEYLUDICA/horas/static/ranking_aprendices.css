@@ -1,3 +1,6 @@
+/* Fuente Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
 /* Contenedor principal del ranking */
 .ranking-container {
     width: 90%;
@@ -7,59 +10,68 @@
     background-color: #f9f9f9;
     border-radius: 10px;
     box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', Arial, sans-serif;
     box-sizing: border-box;
-  }
-  
-  /* Título centrado */
-  .ranking-container h2 {
+}
+
+/* Título centrado */
+.ranking-container h2 {
     text-align: center;
     margin-bottom: 20px;
     color: #045d1f;
-  }
-  
-  /* Tabla */
-  .ranking-container table {
+}
+
+/* Tabla */
+.ranking-container table {
     width: 100%;
     border-collapse: collapse;
     background-color: #fff;
     border-radius: 8px;
     overflow: hidden;
-  }
-  
-  /* Encabezados */
-  .ranking-container th {
+}
+
+/* Encabezados */
+.ranking-container th {
     background-color: #eaeaea;
     padding: 12px;
     text-align: left;
     font-weight: bold;
     border-bottom: 2px solid #ccc;
-  }
-  
-  /* Celdas */
-  .ranking-container td {
+    font-size: 15px;
+}
+
+/* Celdas */
+.ranking-container td {
     padding: 12px;
     border-bottom: 1px solid #ddd;
-  }
-  
-  /* Alternar color de filas */
-  .ranking-container tbody tr:nth-child(even) {
+    font-size: 15px;
+}
+
+/* Alternar color de filas */
+.ranking-container tbody tr:nth-child(even) {
     background-color: #f5f5f5;
-  }
-  
-  /* Responsive */
-  @media (max-width: 768px) {
+}
+
+/* Estilo para el mensaje de no resultados */
+.ranking-container .no-results {
+    text-align: center;
+    font-size: 16px;
+    color: #777;
+    margin-top: 20px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
     .ranking-container {
-      padding: 15px;
+        padding: 15px;
     }
-  
+
     .ranking-container table {
-      font-size: 14px;
+        font-size: 14px;
     }
-  
+
     .ranking-container th,
     .ranking-container td {
-      padding: 10px;
+        padding: 10px;
     }
-  }
-  
+}

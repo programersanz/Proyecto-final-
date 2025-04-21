@@ -1,72 +1,89 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #ccc; /* Verde muy claro, más cercano al estilo "lightgreen" suave */
+    font-family: 'Poppins', sans-serif;
+    background-color: #dee2e6; /* Gris suave */
     margin: 0;
     padding: 0;
 }
 
 .register-container {
-    align-items: center;
     max-width: 500px;
     width: 90%;
     margin: 80px auto;
-    padding: 0;
+    padding: 0 20px;
+    box-sizing: border-box;
 }
 
-.register-container h2 {
+.register-header {
     text-align: center;
-    color: black;
     margin-bottom: 20px;
-    font-size: 1.5rem;
+}
+
+.register-icon {
+    width: 40%;
+    height: 40%;
+    margin-bottom: 10px;
+}
+
+.register-header h2 {
+    color: #343a40;
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.register-header p {
+    font-size: 15px;
+    color: #6c757d;
 }
 
 form {
-    background-color: #f9f9f9; /* Color claro como en el dashboard */
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Estilo suave */
+    background-color: #f9f9f9;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
     width: 100%;
     box-sizing: border-box;
 }
 
 form p {
     margin-bottom: 15px;
-    color: black; /* Texto oscuro para contraste */
+    color: #212529;
+    font-size: 15px;
 }
 
 form p label {
-    font-weight: bold;
+    font-weight: 600;
 }
 
 form input {
     width: 100%;
     padding: 12px;
     margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 14px;
-    outline: none;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    font-size: 15px;
+    background-color: #f8f9fa;
     transition: border 0.3s ease;
     box-sizing: border-box;
 }
 
 form input:focus {
-    border: 1px solid black;
+    border-color: #495057;
+    outline: none;
 }
 
 form button {
     width: 100%;
     padding: 12px;
-    background-color: lightgreen; /* Igual que .ranking-message */
+    background-color: lightgreen;
     color: black;
     border: none;
-    border-left: 5px solid black; /* Estilo inspirado en .ranking-message */
-    border-radius: 5px;
+    border-left: 5px solid black;
+    border-radius: 6px;
     font-size: 16px;
+    font-weight: 600;
     cursor: pointer;
-    margin-top: 20px;
-    transition: background 0.3s ease, box-shadow 0.3s ease;
-    font-weight: bold;
+    margin-top: 15px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
     box-sizing: border-box;
 }
 
@@ -75,19 +92,33 @@ form button:hover {
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
 }
 
+.extra-links {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #6c757d;
+}
+
+.extra-links a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.extra-links a:hover {
+    text-decoration: underline;
+}
+
 @media (max-width: 480px) {
     .register-container {
-        max-width: 90%;
+        margin-top: 100px;
     }
 
-    .register-container h2 {
-        font-size: 1.2rem;
+    .register-header h2 {
+        font-size: 20px;
     }
 
-    form p {
-        font-size: 14px;
-    }
-
+    form p,
     form input,
     form button {
         font-size: 14px;

@@ -2,25 +2,40 @@ body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #ccc; /* Fondo gris claro */
+    background-color: #dee2e6; /* Gris suave de fondo */
 }
 
 .login-container {
-    max-width: 500px; /* Más ancho que antes */
+    max-width: 480px;
     width: 90%;
     margin: 80px auto;
-    background: #f9f9f9; /* Fondo clarito del formulario */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
-    border-radius: 10px;
+    background: #ffffff;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
     text-align: center;
-    padding: 20px; /* Menos padding para que aproveche más el espacio */
+    padding: 30px;
     box-sizing: border-box;
 }
 
-.login-container h2 {
-    color: black; /* Título en negro */
-    font-size: 1.5rem;
+.login-header {
     margin-bottom: 20px;
+}
+
+.login-icon {
+    width: 50%;
+    height: 80px;
+    margin-bottom: 10px;
+}
+
+.login-container h2 {
+    color: #343a40;
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.login-container p {
+    color: #6c757d;
+    font-size: 15px;
 }
 
 form {
@@ -35,12 +50,12 @@ form {
 form p {
     margin-bottom: 15px;
     text-align: left;
-    color: black; /* Texto negro */
+    color: #212529;
     font-size: 15px;
 }
 
 form p label {
-    font-weight: bold;
+    font-weight: 600;
 }
 
 input[type="text"],
@@ -49,10 +64,10 @@ input[type="email"] {
     width: 100%;
     padding: 12px;
     margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 14px;
-    background-color: #fafafa;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    font-size: 15px;
+    background-color: #f8f9fa;
     transition: border 0.3s ease;
     box-sizing: border-box;
 }
@@ -60,48 +75,56 @@ input[type="email"] {
 input[type="text"]:focus,
 input[type="password"]:focus,
 input[type="email"]:focus {
-    border: 1px solid black; /* Borde negro al enfocar */
+    border: 1px solid #495057;
     outline: none;
 }
 
 .login-btn {
     width: 100%;
     padding: 12px;
-    background-color: lightgreen; /* Botón verde claro */
-    color: black;
+    background-color: #6c757d;
+    color: white;
     border: none;
-    border-left: 5px solid black; /* Estilo "dashboard" */
-    border-radius: 5px;
+    border-radius: 6px;
     font-size: 16px;
     cursor: pointer;
-    margin-top: 20px;
-    font-weight: bold;
+    margin-top: 10px;
+    font-weight: 600;
     transition: background 0.3s ease, box-shadow 0.3s ease;
-    box-sizing: border-box;
 }
 
 .login-btn:hover {
-    background-color: #a8e6a1; /* Verde más suave al pasar el mouse */
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+    background-color: #5a6268;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.extra-links {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #6c757d;
+}
+
+.extra-links a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.extra-links a:hover {
+    text-decoration: underline;
 }
 
 @media (max-width: 480px) {
     .login-container {
-        margin-top: 120px;
+        margin-top: 100px;
         padding: 20px;
     }
 
     .login-container h2 {
-        font-size: 1.3rem;
+        font-size: 20px;
     }
 
-    form p {
-        font-size: 14px;
-    }
-
-    input[type="text"],
-    input[type="password"],
-    input[type="email"],
+    form p,
     .login-btn {
         font-size: 14px;
     }

@@ -1,18 +1,11 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Registro Exitoso</title>
-    <link rel="stylesheet" href="">
-</head>
-<body>
-    <form>
-        {% csrf_token %}
-    </form>
-    <div style="text-align: center; margin-top: 50px;">
-        <h2>✅ ¡Registro exitoso!</h2>
-        <p>Gracias por registrar tu asistencia a la actividad.</p>
-        <a href="{% url 'registro_asistencia' %}">Registrar otra asistencia</a>
-    </div>
-</body>
-</html>
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'registro_exitoso.css' %}">
+
+<div class="registro-exitoso-container">
+    <h2>✅ ¡Registro exitoso!</h2>
+    <p>Gracias por registrar tu asistencia a la actividad.</p>
+    <a href="{% url 'registro_asistencia' %}" class="btn-volver">Registrar otra asistencia</a>
+</div>
+{% endblock %}

@@ -1,46 +1,97 @@
 .perfil-container {
-    max-width: 500px;
+    max-width: 600px;
     margin: 40px auto;
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    padding: 25px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .perfil-container h2 {
     text-align: center;
-    color: #007a33;
-    margin-bottom: 20px;
+    color: #343a40;
+    margin-bottom: 10px;
+    font-size: 28px;
+}
+
+.descripcion {
+    text-align: center;
+    color: #6c757d;
+    margin-bottom: 25px;
+    font-size: 16px;
 }
 
 form fieldset {
-    border: 1px solid #ccc;
-    padding: 15px;
-    margin-bottom: 20px;
-    border-radius: 5px;
+    border: 1px solid #dee2e6;
+    padding: 20px;
+    margin-bottom: 25px;
+    border-radius: 6px;
+    background-color: #ffffff;
 }
 
 form legend {
-    font-weight: bold;
-    color: #007a33;
-}
-
-form p {
+    font-weight: 600;
+    color: #495057;
+    font-size: 18px;
     margin-bottom: 10px;
 }
 
-button {
-    display: block;
+form p {
+    margin-bottom: 15px;
+    color: #495057;
+    font-size: 15px;
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="file"],
+form input[type="tel"],
+form select,
+form textarea {
     width: 100%;
     padding: 10px;
-    background-color: #007a33;
+    margin-top: 5px;
+    font-size: 15px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.acciones-formulario {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+button {
+    flex: 1;
+    padding: 12px;
+    background-color: #6c757d;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 6px;
     font-size: 16px;
     cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 button:hover {
-    background-color: #005f27;
+    background-color: #5a6268;
+}
+
+.btn-cancelar {
+    flex: 1;
+    display: inline-block;
+    text-align: center;
+    padding: 12px;
+    background-color: #e9ecef;
+    color: #495057;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.btn-cancelar:hover {
+    background-color: #d6d8db;
 }

@@ -1,24 +1,25 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
-{% load static %}
 <link rel="preconnect" href="https://fonts.gstatic.com" />
-<link
-  href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
-  rel="stylesheet"
-/>
-<link rel="stylesheet" href="{% static '/home.css' %}">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="{% static 'home.css' %}">
+
 <div class="container mt-5 text-center">
     {% if user.is_authenticated %}
-      <h1 class="display-4 text-success">Bienvenido {{ user.username }}</h1>
-      <p class="lead">Esta es la página de inicio de LEYLUDICA.</p>
+        <h1 class="display-4 text-success">¡Hola, {{ user.username }}!</h1>
+        <p class="lead">Bienvenido a <strong>LudicApp</strong>. Desde aquí puedes acceder a tus datos y gestionar tu perfil.</p>
+        <div class="acciones-home">
+            <a href="{% url 'ver_perfil' %}" class="btn btn-primary">Ver Perfil</a>
+        </div>
     {% else %}
-      <h1 class="display-4 text-success">Bienvenido, Invitado</h1>
-      <p class="lead">Accede para ver tu información y gestionar tus horas lúdicas.</p>
-      <div class="d-flex justify-content-center gap-3">
-        <a href="{% url 'login' %}" class="btn btn-success btn-lg">Iniciar sesión</a>
-        <a href="{% url 'register' %}" class="btn btn-outline-success btn-lg">Registrarse</a>
-      </div>
+        <h1 class="display-4 text-success">Bienvenido, Invitado</h1>
+        <p class="lead">Accede para gestionar tus actividades y ver tu información personal.</p>
+        <div class="d-flex justify-content-center gap-3">
+            <a href="{% url 'login' %}" class="btn btn-primary">Iniciar sesión</a>
+            <a href="{% url 'register' %}" class="btn btn-outline-primary">Registrarse</a>
+        </div>
     {% endif %}
 </div>
 {% endblock %}

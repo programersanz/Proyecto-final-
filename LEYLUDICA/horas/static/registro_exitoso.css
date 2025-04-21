@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+.registro-exitoso-container {
+    max-width: 600px;
+    margin: 60px auto;
+    padding: 30px;
+    background-color: #f0fff4;
+    border: 1px solid #c6f6d5;
+    border-radius: 10px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.registro-exitoso-container h2 {
+    color: #38a169;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.registro-exitoso-container p {
+    font-size: 16px;
+    color: #2f855a;
+    margin-bottom: 20px;
+}
+
+.btn-volver {
+    display: inline-block;
+    background-color: #38a169;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn-volver:hover {
+    background-color: #2f855a;
+}

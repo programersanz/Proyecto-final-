@@ -1,0 +1,74 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #e9ecef;
+    margin: 0;
+    padding: 0;
+}
+
+.agregar-horas-container {
+    max-width: 600px;
+    margin: 60px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    text-align: center;
+}
+
+.agregar-horas-container h2 {
+    color: #343a40;
+    margin-bottom: 25px;
+    font-size: 28px;
+}
+
+.formulario-horas {
+    text-align: left;
+}
+
+.formulario-horas p {
+    margin-bottom: 15px;
+    color: #495057;
+    font-size: 16px;
+}
+
+.formulario-horas label {
+    font-weight: 600;
+}
+
+.formulario-horas input,
+.formulario-horas select,
+.formulario-horas textarea {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    font-size: 15px;
+    background-color: #f8f9fa;
+    box-sizing: border-box;
+}
+
+.formulario-horas input:focus,
+.formulario-horas select:focus,
+.formulario-horas textarea:focus {
+    border-color: #6c757d;
+    outline: none;
+}
+
+.btn-guardar {
+    width: 100%;
+    padding: 12px;
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-guardar:hover {
+    background-color: #5a6268;
+}

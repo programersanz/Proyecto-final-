@@ -1,74 +1,73 @@
 /* Fondo general */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5; /* gris claro */
-    color: #333;
-    margin: 0;
-    padding: 0;
-  }
-  
-  /* Título */
-  h2 {
-    text-align: center;
-    margin-top: 40px;
-    color: #045d1f; /* verde oscuro */
-  }
-  
-  /* Contenedor del formulario */
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5; /* gris claro */
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+/* Título */
+h2 {
+  text-align: center;
+  margin-top: 40px;
+  color: #045d1f; /* verde oscuro */
+}
+
+/* Contenedor del formulario */
+form {
+  width: 90%;
+  max-width: 500px;
+  margin: 30px auto;
+  padding: 25px;
+  background-color: #ffffff; /* blanco */
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* sombra sutil */
+}
+
+/* Etiquetas y campos */
+form p {
+  margin-bottom: 20px;
+}
+
+form label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: bold;
+  color: #333;
+}
+
+form input,
+form select,
+form textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+  background-color: #f9f9f9; /* fondo gris claro para inputs */
+}
+
+/* Botón de enviar */
+form button {
+  background-color: #28a745; /* verde */
+  color: #fff;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+form button:hover {
+  background-color: black;
+}
+
+/* Responsive para pantallas pequeñas */
+@media (max-width: 600px) {
   form {
-    width: 90%;
-    max-width: 500px;
-    margin: 30px auto;
-    padding: 25px;
-    background-color: #ffffff; /* blanco */
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* sombra sutil */
+    padding: 20px;
   }
-  
-  /* Etiquetas y campos */
-  form p {
-    margin-bottom: 20px;
-  }
-  
-  form label {
-    display: block;
-    margin-bottom: 6px;
-    font-weight: bold;
-    color: #333;
-  }
-  
-  form input,
-  form select,
-  form textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    box-sizing: border-box;
-    background-color: #f9f9f9; /* fondo gris claro para inputs */
-  }
-  
-  /* Botón de enviar */
-  form button {
-    background-color: #28a745; /* verde */
-    color: #fff;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 6px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-top: 10px;
-  }
-  
-  form button:hover {
-    background-color: black;
-  }
-  
-  /* Responsive para pantallas pequeñas */
-  @media (max-width: 600px) {
-    form {
-      padding: 20px;
-    }
-  }
-  
+}

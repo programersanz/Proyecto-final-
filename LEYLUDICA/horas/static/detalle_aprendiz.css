@@ -1,21 +1,37 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #e9ecef;
+    margin: 0;
+    padding: 0;
+}
+
 .detalle-container {
-    max-width: 800px;
-    margin: 40px auto;
-    padding: 20px;
-    background-color: #f3f3f3;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    max-width: 900px;
+    margin: 60px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .detalle-container h2 {
     text-align: center;
-    color: #007a33;
-    margin-bottom: 20px;
+    color: #000000;
+    margin-bottom: 30px;
+    font-size: 28px;
 }
 
-.detalle-container p {
+.info-aprendiz p {
     font-size: 16px;
     margin-bottom: 10px;
+    color: #343a40;
+}
+
+h3 {
+    margin-top: 40px;
+    font-size: 22px;
+    color: #343a40;
+    text-align: center;
 }
 
 table {
@@ -26,24 +42,33 @@ table {
 
 table th, table td {
     padding: 12px;
-    border: 1px solid #ccc;
+    border: 1px solid #dee2e6;
     text-align: left;
+    font-size: 15px;
 }
 
 table th {
-    background-color: #007a33;
+    background-color: #454b48;
     color: white;
 }
 
 .btn-delete {
-    background-color: #c82333;
+    background-color: #dc3545;
     color: white;
-    padding: 8px 12px;
+    padding: 8px 14px;
     text-decoration: none;
     border-radius: 5px;
     font-size: 14px;
+    transition: background-color 0.3s ease;
 }
 
 .btn-delete:hover {
     background-color: #a71d2a;
+}
+
+.sin-registros {
+    text-align: center;
+    color: #6c757d;
+    margin-top: 20px;
+    font-style: italic;
 }

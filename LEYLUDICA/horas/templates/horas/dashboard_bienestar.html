@@ -1,11 +1,14 @@
 {% extends "base.html" %}
 {% load static %}
-<link rel="stylesheet" href="{% static 'horas/dashboard_bienestar.css' %}">
-
 {% block content %}
+<link rel="stylesheet" href="{% static 'dashboard_bienestar.css' %}">
+
 <div class="dashboard-container">
-  <h2>Dashboard Bienestar</h2>
-  <a href="{% url 'agregar_horas_bienestar' %}" class="btn btn-primary">Agregar Horas</a>
+  <div class="dashboard-header">
+    <h2>Dashboard de Bienestar</h2>
+    <a href="{% url 'agregar_horas_bienestar' %}" class="btn-agregar">+ Agregar Horas</a>
+    <a href="{% url 'ranking_aprendices' %}" class="btn-agregar">Ranking aprendices</a>
+  </div>
 
   <div class="search-bar">
     <form method="get">
@@ -15,26 +18,28 @@
   </div>
 
   {% if aprendices %}
-    <table>
-      <thead>
-        <tr>
-          <th>Usuario</th>
-          <th>Número de documento</th>
-          <th>Número de teléfono</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for a in aprendices %}
-        <tr>
-          <td><a href="{% url 'detalle_aprendiz' a.id %}">{{ a.username }}</a></td>
-          <td>{{ a.profile.document_number }}</td>
-          <td>{{ a.profile.phone_number }}</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+    <div class="tabla-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Usuario</th>
+            <th>Número de documento</th>
+            <th>Número de teléfono</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for a in aprendices %}
+          <tr>
+            <td><a href="{% url 'detalle_aprendiz' a.id %}">{{ a.username }}</a></td>
+            <td>{{ a.profile.document_number }}</td>
+            <td>{{ a.profile.phone_number }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
   {% else %}
-    <p>No se encontraron aprendices.</p>
+    <p class="no-results">No se encontraron aprendices.</p>
   {% endif %}
 </div>
 {% endblock %}

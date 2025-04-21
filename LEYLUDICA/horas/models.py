@@ -5,7 +5,6 @@ from io import BytesIO
 
 from django.core.validators import RegexValidator
 
-import qrcode
 
 TIPOS_DOCUMENTO = [
     ('CC', 'Cédula de Ciudadanía'),

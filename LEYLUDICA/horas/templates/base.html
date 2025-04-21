@@ -21,27 +21,27 @@
       
       {% if user.is_authenticated %}
         <!-- Enlace al Dashboard -->
-        <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+        <li><a href="{% url 'dashboard' %}">Informacion de </br> horas ludicas</a></li>
         
         {% if is_aprendiz %}
-          <li><a href="{% url 'ver_perfil' %}">Mi Perfil</a></li>
+          <li><a href="{% url 'ver_perfil' %}">Mi </br> Perfil</a></li>
         {% endif %}
         
         {% if is_bienestar %}
-          <li><a href="{% url 'ver_perfil' %}">Mi Perfil</a></li>
-          <li><a href="{% url 'agregar_horas_bienestar' %}">Agregar Horas</a></li>
+          <li><a href="{% url 'ver_perfil' %}">Mi </br> Perfil</a></li>
+          <li><a href="{% url 'agregar_horas_bienestar' %}">Gestion </br> horas ludicas</a></li>
         {% endif %}
         
         {% if is_administrativo %}
           <li><a href="{% url 'dashboard_administrativo' %}">Administrativo</a></li>
         {% endif %}
         
-        <li><a href="{% url 'editar_perfil' %}">Editar Perfil</a></li>
+        <li><a href="{% url 'editar_perfil' %}">Editar </br> Perfil</a></li>
         
         <li>
           <form action="{% url 'logout' %}" method="post" style="display:inline;">
               {% csrf_token %}
-              <button type="submit" class="logout-btn">Cerrar sesión</button>
+              <button type="submit" class="logout-btn">Cerrar </br> sesión</button>
           </form>
         </li>
       {% else %}

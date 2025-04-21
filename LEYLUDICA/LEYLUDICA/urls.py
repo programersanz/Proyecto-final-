@@ -47,5 +47,6 @@ urlpatterns = [
     path('registro-asistencia/', views.registrar_asistencia, name='registro_asistencia'),
     path('registro-exitoso/', views.registro_exitoso, name='registro_exitoso'),
     path('ranking/', views.ranking_aprendices, name='ranking_aprendices'),
+    path('certificado/', views.generar_certificado, name='generar_certificado'),
 
 ]

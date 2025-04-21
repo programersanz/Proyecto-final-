@@ -19,6 +19,8 @@ from django.views.generic import UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils import timezone
 from django.db.models import Sum, Count
+from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import letter
 # Create your views here.
 
 def es_aprendiz(user):
@@ -395,3 +397,36 @@ def ranking_aprendices(request):
         })
 
     return render(request, 'horas/ranking_aprendices.html', {'ranking': ranking})
+
+@login_required
+def generar_certificado(request):
+    usuario = request.user
+    total_horas = HorasLudicas.objects.filter(usuario=usuario).aggregate(Sum('horas'))['horas__sum'] or 0
+
+    # Verificar si el usuario ha alcanzado el mínimo de horas requeridas
+    if total_horas < 20:
+        return HttpResponse("Aún no has alcanzado las horas necesarias para obtener el certificado.")
+
+    # Crear la respuesta PDF
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="certificado.pdf"'
+
+    # Crear el objeto PDF
+    p = canvas.Canvas(response, pagesize=letter)
+    width, height = letter
+
+    # Agregar contenido al PDF
+    p.setFont("Helvetica-Bold", 16)
+    p.drawCentredString(width / 2, height - 100, "Certificado de Horas Lúdicas")
+
+    p.setFont("Helvetica", 12)
+    p.drawString(100, height - 150, f"Nombre: {usuario.first_name} {usuario.last_name}")
+    p.drawString(100, height - 170, f"Usuario: {usuario.username}")
+    p.drawString(100, height - 190, f"Horas acumuladas: {total_horas}")
+
+    p.drawString(100, height - 230, "Este certificado confirma que el usuario ha completado las horas lúdicas requeridas.")
+
+    p.showPage()
+    p.save()
+
+    return response

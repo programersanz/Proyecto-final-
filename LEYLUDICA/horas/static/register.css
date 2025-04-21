@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 body {
     font-family: 'Poppins', sans-serif;
     background-color: #dee2e6; /* Gris suave */
@@ -124,3 +125,48 @@ form button:hover {
         font-size: 14px;
     }
 }
+=======
+/* Box-sizing global */ *, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+.form-container {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 20px 30px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  font-family: Arial, sans-serif;
+}
+.form-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #007a33;
+}
+.field { margin-bottom: 15px; }
+.field label { display: block; font-weight: bold; margin-bottom: 5px; }
+.field input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.field .helptext { display: block; font-size: 0.9em; color: #666; margin-top: 4px; }
+.field .errorlist { margin-top: 4px; color: #c82333; font-size: 0.9em; }
+.btn-submit {
+  width: 100%;
+  padding: 12px;
+  background-color: #00c851;
+  color: white;
+  font-size: 1.1em;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.btn-submit:hover { background-color: #007a33; }
+@media (max-width: 480px) {
+  .form-container { padding: 15px; }
+  .btn-submit { font-size: 1em; }
+}
+>>>>>>> 99792096ebe0892c47a5c2572ea73428ca398493

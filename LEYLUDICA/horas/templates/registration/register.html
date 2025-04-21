@@ -1,7 +1,7 @@
 {% extends "base.html" %}
-{% block content %}
 {% load static %}
 
+<<<<<<< HEAD
 <link rel="preconnect" href="https://fonts.gstatic.com" />
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="{% static 'register.css' %}">
@@ -13,10 +13,27 @@
     <p>Crea tu cuenta para comenzar a gestionar tus horas lúdicas.</p>
   </div>
 
+=======
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'register.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="form-container">
+  <h2>Registro de Usuario</h2>
+>>>>>>> 99792096ebe0892c47a5c2572ea73428ca398493
   <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Registrarse</button>
+    {{ form.non_field_errors }}
+    <div class="field">{{ form.username.label_tag }}{{ form.username }}{{ form.username.help_text }}{{ form.username.errors }}</div>
+    <div class="field">{{ form.email.label_tag }}{{ form.email }}{{ form.email.help_text }}{{ form.email.errors }}</div>
+    <div class="field">{{ form.first_name.label_tag }}{{ form.first_name }}{{ form.first_name.errors }}</div>
+    <div class="field">{{ form.last_name.label_tag }}{{ form.last_name }}{{ form.last_name.errors }}</div>
+    <div class="field">{{ form.document_number.label_tag }}{{ form.document_number }}{{ form.document_number.errors }}</div>
+    <div class="field">{{ form.phone_number.label_tag }}{{ form.phone_number }}{{ form.phone_number.errors }}</div>
+    <div class="field">{{ form.password1.label_tag }}{{ form.password1 }}{{ form.password1.help_text }}{{ form.password1.errors }}</div>
+    <div class="field">{{ form.password2.label_tag }}{{ form.password2 }}{{ form.password2.help_text }}{{ form.password2.errors }}</div>
+    <button type="submit" class="btn-submit">Registrarse</button>
   </form>
 
   <div class="extra-links">

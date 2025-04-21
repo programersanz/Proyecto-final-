@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required, user_passes_test, permission_required
 from .models import HorasLudicas, Actividad, RegistroAsistencia, Profile
 from django.contrib.auth.models import User, Group
-from .forms import HorasLudicasForm, RegistroForm, CustomUserCreationForm, HorasLudicasBienestarForm, EditUserForm, EditProfileForm, EliminarHorasForm, RegistroAsistenciaForm
+from .forms import HorasLudicasForm, RegistroForm, CustomUserCreationForm, HorasLudicasBienestarForm, EditUserForm, EditProfileForm, EliminarHorasForm, RegistroAsistenciaForm, PasswordConfirmationForm
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
@@ -187,22 +187,30 @@ def home(request):
 @login_required
 def editar_perfil(request):
     user = request.user
-    # Inicializar los formularios con la instancia actual
+
     if request.method == "POST":
         user_form = EditUserForm(request.POST, instance=user)
         profile_form = EditProfileForm(request.POST, instance=user.profile)
-        if user_form.is_valid() and profile_form.is_valid():
-            user_form.save()
-            profile_form.save()
-            messages.success(request, "Perfil actualizado exitosamente.")
-            return redirect("home")
+        pass_form = PasswordConfirmationForm(request.POST)
+
+        if user_form.is_valid() and profile_form.is_valid() and pass_form.is_valid():
+            pwd = pass_form.cleaned_data['current_password']
+            if not user.check_password(pwd):
+                pass_form.add_error('current_password', 'Contraseña incorrecta')
+            else:
+                user_form.save()
+                profile_form.save()
+                messages.success(request, "Perfil actualizado exitosamente.")
+                return redirect("home")
     else:
         user_form = EditUserForm(instance=user)
         profile_form = EditProfileForm(instance=user.profile)
-        
+        pass_form = PasswordConfirmationForm()
+
     context = {
         "user_form": user_form,
         "profile_form": profile_form,
+        "pass_form": pass_form,
     }
     return render(request, "horas/editar_perfil.html", context)
 

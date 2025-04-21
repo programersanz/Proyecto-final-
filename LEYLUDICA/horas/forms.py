@@ -22,7 +22,6 @@ class CustomUserCreationForm(UserCreationForm):
     username = forms.CharField(
         max_length=150,
         label="Nombre de usuario",
-        help_text="150 caracteres como máximo. Letras, dígitos y @/./+/-/_ sólo.",
     )
     email = forms.EmailField(
         required=True,
@@ -90,7 +89,35 @@ class EditUserForm(forms.ModelForm):
         model = User
         fields = ['first_name', 'last_name', 'email']
 
+class PasswordConfirmationForm(forms.Form):
+    current_password = forms.CharField(
+        label="Contraseña actual",
+        widget=forms.PasswordInput(attrs={'autocomplete': 'current-password'}),
+        strip=False,
+    )
+
 class EditProfileForm(forms.ModelForm):
+    document_number = forms.CharField(
+        max_length=20,
+        label="Número de documento",
+        validators=[
+            RegexValidator(
+                regex=r'^\d+$',
+                message="Sólo se permiten dígitos en el documento."
+            )
+        ]
+    )
+    phone_number = forms.CharField(
+        max_length=15,
+        label="Número de teléfono",
+        validators=[
+            RegexValidator(
+                regex=r'^\d{10}$',
+
+            )
+        ]
+    )
+
     class Meta:
         model = Profile
         fields = ['document_number', 'phone_number']

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 body {
     font-family: 'Poppins', sans-serif;
     background-color: #dee2e6; /* Gris suave */
@@ -125,7 +124,6 @@ form button:hover {
         font-size: 14px;
     }
 }
-=======
 /* Box-sizing global */ *, *::before, *::after { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
 
@@ -169,4 +167,3 @@ html, body { margin: 0; padding: 0; }
   .form-container { padding: 15px; }
   .btn-submit { font-size: 1em; }
 }
->>>>>>> 99792096ebe0892c47a5c2572ea73428ca398493

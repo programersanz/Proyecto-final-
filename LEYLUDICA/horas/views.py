@@ -405,7 +405,8 @@ def generar_certificado(request):
 
     # Verificar si el usuario ha alcanzado el mínimo de horas requeridas
     if total_horas < 20:
-        return HttpResponse("Aún no has alcanzado las horas necesarias para obtener el certificado.")
+        messages.warning(request, "Aún no has alcanzado las horas necesarias para obtener el certificado.")
+        return redirect('dashboard')  # o la vista donde estás mostrando el botón de descarga
 
     # Crear la respuesta PDF
     response = HttpResponse(content_type='application/pdf')
@@ -416,7 +417,7 @@ def generar_certificado(request):
     width, height = letter
 
     # Agregar contenido al PDF
-    p.setFont("Helvetica-Bold", 16)
+    p.setFont("Helvetica-Bold", 12)
     p.drawCentredString(width / 2, height - 100, "Certificado de Horas Lúdicas")
 
     p.setFont("Helvetica", 12)

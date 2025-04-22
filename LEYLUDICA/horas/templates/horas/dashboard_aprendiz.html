@@ -3,8 +3,25 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'dashboard_aprendiz.css' %}">
 
+{% if messages %}
+  <div id="mensaje-alerta-superior">
+    {% for message in messages %}
+      <div class="alert {{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+  </div>
+  <script>
+    setTimeout(function() {
+      const alerta = document.getElementById('mensaje-alerta-superior');
+      if (alerta) {
+        alerta.style.display = 'none';
+      }
+    }, 4000);
+  </script>
+{% endif %}
+
 <div class="dashboard-container">
   <h2>Informacion</h2>
+
 
   {% if mensaje_ranking %}
     <div class="ranking-message">
@@ -57,8 +74,13 @@
         </tbody>
       </table>
     </div>
-    <a href="{% url 'generar_certificado' %}">Descargar Certificado</a>
-
+    <div class="dashboard-container">
+      <!-- ... tu contenido ... -->
+    
+      <a href="{% url 'generar_certificado' %}" class="btn-certificado">Descargar Certificado</a>
+    </div>
+    
+</div>
   </div>
 </div>
 {% endblock %}

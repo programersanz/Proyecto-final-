@@ -141,7 +141,28 @@ class RegistroAsistenciaForm(forms.ModelForm):
                 'class': 'form-control',
                 'pattern': '[0-9]*',
                 'inputmode': 'numeric',
-                'placeholder': 'Solo números'
+                'placeholder': 'Solo números',
+                'oninput': 'this.value = this.value.replace(/[^0-9]/g, "")'  # Evita que se escriban letras
             }),
         }
 
+    def clean(self):
+        cleaned_data = super().clean()
+        numero_identificacion = cleaned_data.get('numero_identificacion')
+        actividad = cleaned_data.get('actividad')
+
+        if numero_identificacion and actividad:
+            try:
+                perfil = Profile.objects.get(document_number=numero_identificacion)
+
+                ya_registrado = RegistroAsistencia.objects.filter(perfil=perfil, actividad=actividad).exists()
+                if ya_registrado:
+                    raise forms.ValidationError(
+                        "¡No puedes volver a seleccionar esta actividad! Participa en más actividades."
+                    )
+
+            except Profile.DoesNotExist:
+                # Si no se encuentra perfil, lo dejamos pasar (podrías manejarlo distinto si lo deseas)
+                pass
+
+        return cleaned_data

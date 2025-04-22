@@ -153,3 +153,53 @@ html, body {
     gap: 10px;
   }
 }
+@keyframes slideDown {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.nav-links a::after {
+  background-color: #ffffff;
+  height: 3px;
+  border-radius: 2px;
+}
+.navbar:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.3s ease;
+}
+
+@keyframes fadeInFooter {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.site-footer {
+  animation: fadeInFooter 0.8s ease-out;
+}
+
+@media (max-width: 480px) {
+  .logo-img {
+    height: 40px;
+  }
+
+  .nav-links {
+    gap: 5px;
+    font-size: 13px;
+  }
+
+  .footer-links {
+    flex-direction: column;
+  }
+}

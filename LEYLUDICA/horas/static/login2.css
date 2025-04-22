@@ -129,3 +129,34 @@ input[type="email"]:focus {
         font-size: 14px;
     }
 }
+
+@keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .login-container {
+    animation: fadeInUp 0.6s ease;
+  }
+  input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus {
+    border: 1px solid #007bff;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+}
+.login-btn:active {
+    transform: scale(0.98);
+    box-shadow: none;
+}
+
+@media (max-width: 480px) {
+    .login-container {
+        animation: fadeInUp 1s ease;
+    }
+}
